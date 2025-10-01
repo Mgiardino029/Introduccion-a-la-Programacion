@@ -1,0 +1,82 @@
+program {
+
+    CopiarCeldaAl_(direccion)
+
+}
+
+procedure CopiarCeldaAl_(direccion) {
+    /*
+    proposito: copia el contenido de la celda actual en la celda lindante al "direccion". 
+    el cabeazal finaliza en la celda lindante al "direccion"
+    precondiciones: debe haber al menos una celda en direccion al "direccion"
+    parametros: direccion - Direccion
+    observaciones: 
+    */
+
+    contenidoDeBolitasRojo := (nroBolitas(Rojo))
+    contenidoDeBolitasVerde := (nroBolitas(Verde))
+    contenidoDeBolitasNegro := (nroBolitas(Negro))
+    contenidoDeBolitasAzul := (nroBolitas(Azul))
+    Mover(direccion)
+    Poner_DeColor_(contenidoDeBolitasRojo, Rojo)
+    Poner_DeColor_(contenidoDeBolitasVerde, Verde)
+    Poner_DeColor_(contenidoDeBolitasNegro, Negro)
+    Poner_DeColor_(contenidoDeBolitasAzul, Azul)
+}
+
+procedure Poner_DeColor_(cantidad,color) {
+    /*
+    proposito: poner "cantidad" de bolitas de color "color"
+    precondiciones: 
+    parametros:
+    cantidad - Cantidad de bolitas a poner en la celda actual
+    color - Color de bolitas a poner en la celda actual
+    observaciones:
+    */
+    repeat(cantidad) {
+        Poner(color)
+    }
+}
+
+
+function HayBolitas_EnCeldaAl_(color,direccion) {
+    /*
+    proposito: indica si hay bolitas de color "color" en la celda hacia el "direccion"
+    precondiciones: debe haber al menos una celda lindante en direccion al "direccion", en caso de no haber una celda lindante
+    en direccion al "direccion" hace boom.
+    
+    parametros:
+    tipo: Booleano
+    color - Color
+    direccion - Direccion
+    observcaciones:
+    */
+
+    Mover(direccion)
+    Return(hayBolitas(color))
+}
+
+
+
+
+function hayBolitas_Hacia_(direccion, color) {
+    /*
+    proposito: indica si alguna de las celdas en la direccion "direccion" hay bolitas de color "color"
+    precondiciones: debe haber al menos una celda en direccion "direccion"
+    tipo: Booleano
+    observaciones: es un recorrido de busqueda sobre celdas de una linea sin saber si hay una celda con bolitas. buscando 
+    una celda con bolitas.
+    */
+    Mover(direccion)
+    while(not hayBolitas(color)) {
+        Mover(direccion)
+        
+    }
+    return(hayBolitas(color))
+}
+
+
+
+
+
+

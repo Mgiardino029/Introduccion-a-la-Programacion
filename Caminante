@@ -1,0 +1,195 @@
+program {
+
+}
+
+
+
+function direcciónDelCódigo_(código) {
+    /* 
+    PROPÓSITO: Describe la dirección correspondiente al 
+    código dado. 
+    PARÁMETROS: 
+    * código: Número - código de la dirección 
+    a describir. 
+    TIPO: Dirección 
+    PRECONDICIONES: El código dado está entre 1 y 4. 
+    */ 
+
+    choose (
+
+        nroBolitas(Azul) == 1{
+            return(Norte)
+        }
+
+        nroBolitas(Azul) == 2 {
+            return(Este)
+        }
+
+        nroBolitas(Azul) == 3 {
+            return(Sur)
+        }
+
+        otherwise {
+            return(Oeste)
+        }
+        
+    )
+
+        
+        
+        
+}
+
+function colorCaminante() {
+    /*
+    proposito: describe las bolitas con las que esta representado el caminante
+    precondiciones: ninguna
+    Tipo: Color
+    observaciones: el caminante esta representado con bolitas azules
+    */
+
+    return(Azul)
+}
+
+function colorIndicador() {
+    /*
+    proposito: describe las bolitas con las que esta representado un indicador
+    precondiciones: ninguna
+    Tipo: Color
+    observaciones: los indicadores estan representados con bolitas de color Verde
+    */
+}
+
+function colorHuella() {
+    /*
+    proposito: describe el color con el que esta representada una huella
+    precondiciones: ninguna
+    Tipo: Color
+    observaciones: la huella esta representada con bolitas de color negro
+    */
+
+    
+}
+
+function colorMeta() {
+    /*
+    proposito: describe el color con el que esta representada la meta
+    precondiciones: ninguna
+    tipo: Color
+    observaciones: la meta esta representada con una celda con cualquier numero de bolitas 
+    de color rojo
+    */
+}
+
+procedure LlevarAlCaminanteALaMeta() {
+    /*
+    proposito: llevar al caminante durante el recorrido de su camino hasta la meta
+    precondiciones: 
+    parametros:
+    observaciones: el final de la meta se representa con una celda con cualquier numero
+    de bolitas rojas
+    */
+}
+
+function estáEnLaMeta() {
+    /*
+    proposito: indica si el caminante esta o no en la meta
+    precondiciones: indica True si en la celda actual hay al menos una bolita de color rojo
+    de lo contrario indica False
+    tipo: Booleano
+    observaciones: 
+    */
+
+    return(hayBolitas(colorMeta()))
+}
+
+procedure DejarHuella() {
+    /*
+    proposito: deja una huella en la celda actual
+    precondiciones: ninguna 
+    parametros:
+    observaciones: la huella esta representada por bolitas negras
+    */
+
+    Poner(colorHuella())
+}
+
+procedure DarUnPaso() {
+    /*
+    proposito: realiza un paso en el paseo del caminante 
+    precondiciones: debe haber al menos una celda hacia la direccion en la que el caminante
+    va a avanzar
+    parametros:
+    observaciones:
+    Si hay que cambiar la dirección (está sobre una celda indicadora), lo hace. 
+    Finalmente, se mueve en la dirección correspondiente. 
+    */
+}
+
+procedure CambiarDeDirecciónSiHayIndicador() {
+    /*
+    proposito: cambia la direccion del caminante cuando se encuentra con un indicador 
+    precondiciones: 
+    parametros:
+    observaciones: el indicador esta representado por bolitas de color verde, depende la cantidad 
+    describe la direccion en donde el caminante va a avanzar
+    */
+}
+
+procedure MoverAlCaminanteHaciaDondeMira() {
+    /*
+    proposito: mueve al caminanteun paso hacia la direccion a la cual esta mirando
+    precondiciones:
+    parametros:
+    observaciones:
+    */
+    
+}
+
+function hayIndicadorDeCambioDeDirección() {
+     /*
+    proposito: indica si en la celda actual hay un indicador
+    precondiciones:
+    tipo:
+    observaciones:
+    */
+}
+
+procedure CambiarDirecciónDelCaminanteALaDelIndicador() {
+     /*
+    proposito: cambia la dirección del caminante para que coincida con la del indicador de la celda actual. 
+    precondiciones:
+    parametros:
+    observaciones:
+    */
+}
+
+procedure MoverAlCaminanteAl_(dirección) {
+     /*
+    proposito: mueve al caminante un paso hacie el "direccion"
+    precondiciones:
+    parametros:
+    observaciones:
+    */
+}
+
+procedure Cambiar_ParaImitar_(colorACambiar, colorAImitar) {
+     /*
+    proposito: que cambia la cantidad de bolitas de "colorACambiar" según la cantidad
+    de bolitas de "colorAImitar" que haya en la celda actual. 
+    precondiciones:
+    parametros:
+    observaciones:
+    */
+}
+
+procedure Mover_Bolitas_Al_(cantidad, color, dirección) {
+      /*
+    proposito: Mueve la cantidad indicada de bolitas de color a la celda lindante en la 
+    dirección dada, y deja el cabezal en esa celda.
+    precondiciones:
+    parametros:
+    observaciones:
+    */
+}
+
