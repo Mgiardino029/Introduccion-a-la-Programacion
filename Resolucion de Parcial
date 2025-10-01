@@ -32,6 +32,44 @@ function esComponenteSaturado_(componente) {
     observaciones: 
     */
 
-    return(intensidadDeComponente_Aca(componente) > intensidadDeComponenteEnLindantes(componentes))
-    
+    return(intensidadDeComponente_Aca(componente) > intensidadDeComponente_EnLindantes(componentes))
+
 }
+
+
+function intensidadDeComponente_EnLindantes(componentes) {
+    /*
+    proposito: describe la intensidad de las componentes lindantes
+    precondiciones:
+    tipo: numero
+    parametro: 
+    componente: color - indica el color al cual se evaluaran los componentes lindantes
+    observaciones: es un recorrido de acumulacion de intensidades sobre componentes de un pixel buscando
+    cuanto es la suma de sus intensidades    // resolucion del parcial pusieron "direcciones" - Es un recorrido de acumulacion sobre direcciones para sumar 
+                la intensidad del componente en sus lindantes 
+    */
+
+    direccionActual := minDir()
+    intensidadHastaAhora := intensidadDeComponenteAl_YAl_(componente, direccionActual)
+    while(direccionActual /= maxDir()) {
+        direccionActual := siguiente(direccionActual)
+        intensidadHastaAhora := intensidadHastaAhora + intensidadDeComponenteAl_YAl_(componente, direccionActual)    
+    }
+    return(intensidadHastaAhora)
+
+}
+
+function intensidadDeComponenteAl_YAl_(componente, direccion) {
+    /*
+    proposito: describe la intensidad del componente "componente" en direccion "direccion" en caso de no haberlo retorna 0 
+    precondiciones: ninguna
+    parametros:
+    componente: color - describe el color del componente del cual queremos saber su intensidad
+    direccion: direccion - direccion a la cual queremos observar
+    observaciones:
+    */
+
+    return(choose intensidadDeComponente_EnPixelAl_(componente, direccion) when (puedeMover(direccion)) 0 otherwise)
+}
+
+
