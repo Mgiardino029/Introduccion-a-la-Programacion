@@ -1,0 +1,37 @@
+program {
+
+
+
+}
+
+
+function esPixelSaturadoAca() {
+    /*
+    proposito: indica si el pixel actual esta saturado en alguna de sus componentes 
+    precondiciones: ninguna
+    Tipo: bolleano
+    observaciones: es un recorrido de busqueda sin saber si lo que buscamos existe sobre componentes para 
+    saber si alguno de ellos esta saturado*/
+
+
+    componenteActual := minComp()
+    while(componenteActual /= maxComp() && not esComponenteSaturado_(componenteActual)) {
+        componenteActual := irASiguienteComponente_(componenteActual)
+    }
+    return(esComponenteSaturado_(componenteActual))
+
+}
+
+function esComponenteSaturado_(componente) {
+    /*
+    proposito: indica si el componente "componente" esta saturado
+    precondiciones: ninguna
+    tipo: booleano
+    parametros: 
+    componente: color - indica el color del componente que quiero indicar si esta saturado
+    observaciones: 
+    */
+
+    return(intensidadDeComponente_Aca(componente) > intensidadDeComponenteEnLindantes(componentes))
+    
+}
