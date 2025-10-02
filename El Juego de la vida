@@ -13,9 +13,9 @@ program {
 
     ------------------------------------------------------------------------------------------------------------------------------------------
 
-    * Es viva si tiene al menos 2 vecinas vivas
-
-    * Si tiene mas de 3 vecinas vivas,muere
+    * Es viva si tiene al menos 2 vecinas vivas escasez
+ 
+    * Si tiene mas de 3 vecinas vivas,muere sobre
     
     * Toda celula viva con 2 o 3 vecinas viva pasa a la siguiente generacion
 
@@ -50,10 +50,23 @@ function esCelulaViva() {
     Observaciones: la celula actual esta viva si tiene una bolita Verde
     */
 
-    return(hayBolitas(Verde))
+    return(hayBolitas(Verde) && not esCelulaPorMorir())
 
 }
 
+function esCelulaPorMorir() {
+    /*
+    proposito: indica si la celula va a morir por sobrepoblacion o escases de poblacion                                // si son menos de 2 o mas de 3 muere
+    precondiciones: tiene menos de 2 o mas de 3 vecinas vivas
+    tipo: Booleano
+    observaciones: 
+    */
+
+    return()
+
+
+
+}
 
 
 function nroDeVecinasVivas() {
