@@ -50,32 +50,67 @@ function esCelulaViva() {
     Observaciones: la celula actual esta viva si tiene una bolita Verde
     */
 
-    return(hayBolitas(Verde) && not esCelulaPorMorir())
+    return(hayBolitas(Verde))
 
 }
 
-function esCelulaPorMorir() {
-    /*
-    proposito: indica si la celula va a morir por sobrepoblacion o escases de poblacion                                // si son menos de 2 o mas de 3 muere
-    precondiciones: tiene menos de 2 o mas de 3 vecinas vivas
-    tipo: Booleano
-    observaciones: 
-    */
 
-    return()
-
-
-
-}
 
 
 function nroDeVecinasVivas() {
     /*
-    proposito:
-    precondiciones:
-    tipo:
-    Observaciones:
+    proposito: describe la cantidad de celulas vivas al rededor de la celda actual
+    precondiciones: ninguna
+    tipo: numero
+    Observaciones: 
     */
+
+    return(unoSi_CeroSinoDiagAl_(esCelulaViva(),direccion) + 
+            unoSi_CeroSinoDiagAl_(esCelulaViva(),siguiente(direccion))
+
 }
+
+function nroDeVecinasVivasOctogonal() {
+    /*
+    proposito: describe el numero de vecinas vivas en posicion octogonal de la celda actual
+    precondiciones: ninguna
+    tipo: numero
+    observaciones: un recorrido de acumulacion sobre celulas de un universo, contando la cantidad
+    de celulas vivas que hay vecinas octogonales de la celula actual
+    */
+
+    celulaActual := minDir()
+    cantidadVivasHastaAhora := 0
+    while(celulaActual /= maxDir()) {
+        calulaActual := siguiente(celulaActual)
+        cantidadVivasHastaAhora := cantidadVivasHastaAhora + unoSi_CeroSino(esCelulaViva)
+    }
+    return(cantidadVivasHastaAhora)
+
+}
+
+function nroDeVecinasVivasDiagonal() {
+
+        /*
+    proposito: describe el numero de vecinas vivas en posicion diagonal de la celda actual
+    precondiciones: ninguna
+    tipo: numero
+    observaciones: un recorrido de acumulacion sobre celulas de un universo, contando la cantidad
+    de celulas vivas que hay vecinas en diagonal de la celula actual
+    */
+
+    celulaActual := minDir()
+    cantidadVivasHastaAhora := 0
+    while(celulaActual /= maxDir()) {
+        calulaActual := DiagonalAl_YAl_(celulaActual, siguiente(celulaActual))
+        cantidadVivasHastaAhora := unoSi_CeroSino(esCelulaViva)
+    }
+    return(cantidadVivasHastaAhora)
+
+}
+
+
+
+
 
 
