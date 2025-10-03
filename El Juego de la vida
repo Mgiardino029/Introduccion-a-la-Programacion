@@ -23,10 +23,10 @@ program {
 
     ------------------------------------------------------------------------------------------------------------------------------------------
 
-    Ejercicio   1) Escribir la función esCélulaViva(), que indica si la célula en la celda actual está viva o no.               // retorna
+    Ejercicio   1) Escribir la función esCélulaViva(), que indica si la célula en la celda actual está viva o no.       listo        // retorna
     
     Ejercicio   2) Escribir la función nroDeVecinasVivas() que describe el número de células vivas que son vecinas de
-                la célula actual.                                                                                               // acumulacion entre vecinas
+                la célula actual.                                                                                        listo       // acumulacion entre vecinas
     
     Ejercicio   3) Escribir PrepararCélulaActual(), que aplique las pautas de juego a la célula actual.                         // transformacion
     
@@ -62,7 +62,7 @@ function nroDeVecinasVivas() {
     proposito: describe la cantidad de celulas vivas al rededor de la celda actual
     precondiciones: ninguna
     tipo: numero
-    Observaciones: 
+    Observaciones: es un recorrido acumulacion sobre direcciones de una celula buscando cuantas celulas vecinas estan vivas
     */
 
         celulaActual := minDir()
@@ -79,7 +79,7 @@ function nroDeVecinasVivas() {
 function unoSi_CeroSinoAl_(condicion,direccion) {
     /*
     proposito: describe el numero de vecinas vivas en posicion octogonal de la celda actual
-    precondiciones: ninguna
+    precondiciones: debe haber al menos una celda libre en direccion al "direccion"
     tipo: numero
     observaciones: un recorrido de acumulacion sobre celulas de un universo, contando la cantidad
     de celulas vivas que hay vecinas octogonales de la celula actual
@@ -94,7 +94,7 @@ funcion unoSi_CeroSinoDiagAl_(condicion,direccion) {
 
      /*
     proposito: describe el numero de vecinas vivas en posicion diagonal de la celda actual
-    precondiciones: ni
+    precondiciones: debe haber al menos una celda libre en la direccion siguiente a "direccion"
     tipo: numero
     observaciones: un recorrido de acumulacion sobre celulas de un universo, contando la cantidad
     de celulas vivas que hay vecinas octogonales de la celula actual
@@ -106,6 +106,25 @@ funcion unoSi_CeroSinoDiagAl_(condicion,direccion) {
 
 
    
+
+
+}
+
+procedure PrepararCélulaActual() {
+    /*
+    proposito: prepara la celula actual aplicandole las pautas del juego
+    precondiciones: 
+    parametros:
+    observaciones: es un recorrido de transformacion sobre celulas de un universo aplicando los cambios correspondientes de las pautas del juego
+    */
+
+    IrAPrimerElemento()
+    while(haySiguienteCelula()) {
+        
+        IrALaSiguienteCelula()
+        }
+
+
 
 
 }

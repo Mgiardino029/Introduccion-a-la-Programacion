@@ -1,6 +1,6 @@
 program {
 
-// dddd
+
 
 }
 
@@ -49,7 +49,7 @@ function intensidadDeComponente_EnLindantes(componentes) {
     // acumulacion sobre direcciones para sumar la intensidad del componente en sus lindantes
     */
 
-    direccionActual := minDir() minInt
+    direccionActual := minDir() 
     intensidadHastaAhora := intensidadDeComponenteAl_YAl_(componente, direccionActual)
     while(direccionActual /= maxDir()) {
         direccionActual := siguiente(direccionActual)
