@@ -86,7 +86,7 @@ function unoSi_CeroSinoAl_(condicion,direccion) {
     */
 
     Mover(direccion)
-    return(choose 1 when condicion 0)
+    return(unoSi_CeroSino(condicion))
 
 }
 
@@ -94,14 +94,15 @@ funcion unoSi_CeroSinoDiagAl_(condicion,direccion) {
 
      /*
     proposito: describe el numero de vecinas vivas en posicion diagonal de la celda actual
-    precondiciones: ninguna
+    precondiciones: ni
     tipo: numero
     observaciones: un recorrido de acumulacion sobre celulas de un universo, contando la cantidad
     de celulas vivas que hay vecinas octogonales de la celula actual
     */
 
+    Mover(direccion)
     Mover(siguiente(direccion))
-    return(choose 1 when condicion 0)
+    return(unoSi_CeroSino(condicion))
 
 
    
