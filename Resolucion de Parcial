@@ -7,69 +7,60 @@ program {
 
 function esPixelSaturadoAca() {
     /*
-    proposito: indica si el pixel actual esta saturado en alguna de sus componentes 
-    precondiciones: ninguna
-    Tipo: bolleano
-    observaciones: es un recorrido de busqueda sin saber si lo que buscamos existe sobre componentes para 
-    saber si alguno de ellos esta saturado*/
-
-
-    componenteActual := minComp()
-    while(componenteActual /= maxComp() && not esComponenteSaturado_(componenteActual)) {
-        componenteActual := irASiguienteComponente_(componenteActual)
-    }
-    return(esComponenteSaturado_(componenteActual))
-
-}
-
-function esComponenteSaturado_(componente) {
-    /*
-    proposito: indica si el componente "componente" esta saturado
+    proposito: indica si el pixel actual esta saturado en alguno de sus componentes 
     precondiciones: ninguna
     tipo: booleano
-    parametros: 
-    componente: color - indica el color del componente que quiero indicar si esta saturado
-    observaciones: 
+    observaciones: es un recorrido de busqueda sin saber si existe lo que buscamos sobre componentes para saber si algun componente esta saturado
     */
 
-    return(intensidadDeComponente_Aca(componente) > intensidadDeComponente_EnLindantes(componentes))
-
-}
-
-
-function intensidadDeComponente_EnLindantes(componentes) {
-    /*
-    proposito: describe la intensidad de las componentes lindantes
-    precondiciones:
-    tipo: numero
-    parametro: 
-    componente: color - indica el color al cual se evaluaran los componentes lindantes
-    observaciones: es un recorrido de acumulacion de intensidades sobre componentes de un pixel buscando
-    cuanto es la suma de sus intensidades    // resolucion del parcial pusieron "direcciones" - Es un recorrido de 
-    // acumulacion sobre direcciones para sumar la intensidad del componente en sus lindantes
-    */
-
-    direccionActual := minDir() 
-    intensidadHastaAhora := intensidadDeComponenteAl_YAl_(componente, direccionActual)
-    while(direccionActual /= maxDir()) {
-        direccionActual := siguiente(direccionActual)
-        intensidadHastaAhora := intensidadHastaAhora + intensidadDeComponenteAl_YAl_(componente, direccionActual)    
+    componenteActual := minComponente()
+    while(componenteActual /= maxComponente() && not esComponenteSaturado_(ComponenteActual)) {
+        componenteActual := siguiente(componenteActual)
     }
-    return(intensidadHastaAhora)
+    return(escomponenteSaturado_(componenteActual))
+
 
 }
 
-function intensidadDeComponenteAl_YAl_(componente, direccion) {
+
+function esComponentesaturado_(componente) {
     /*
-    proposito: describe la intensidad del componente "componente" en direccion "direccion" en caso de no haberlo retorna 0 
+    proposito: indica si la intensidad del componente actual es mayor a la intensidad en sus lindantes
     precondiciones: ninguna
-    parametros:
-    componente: color - describe el color del componente del cual queremos saber su intensidad
-    direccion: direccion - direccion a la cual queremos observar
+    tipo: booleano
     observaciones:
     */
 
-    return(choose intensidadDeComponente_EnPixelAl_(componente, direccion) when (puedeMover(direccion)) 0 otherwise)
+    return( intensidadDeComponente_Aca(componente > intensidadDecomponente_EnLindantes()))
+
+
 }
 
+function intensidadDecomponente_EnLindantes() {
+    /*
+    proposito: describe la intensidad de componente "componente" en sus lindantes
+    precondiciones: ninguna
+    tipo: numero
+    observaciones: es un recorrido de acumulacion sobre direcciones sumando intensidades de los componentes len sus indantes
+    */
 
+    direccionActual := minDir()
+    intensidadHastaAhora := intensidadDeComponente_Al_(componente,direccionActual)
+    while (direcciónActual /= maxDir()) {
+        direcciónActual := siguiente(direcciónActual)
+        intensidadHastaAhora := intensidadHastaAhora + intensidadDeComponente_Al_(componente,direccionActual)
+        }
+        return (intensidadHastaAhora)
+
+
+
+}
+
+function intensidadDeComponente_Aca() {
+    /*
+    proposito: 
+    precondiciones:
+    tipo:
+    observaciones:
+    */
+}
