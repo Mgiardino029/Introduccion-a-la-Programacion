@@ -56,11 +56,29 @@ function intensidadDecomponente_EnLindantes() {
 
 }
 
-function intensidadDeComponente_Aca() {
+function intensidadDeComponente_Al_(componente, direccion) {
     /*
-    proposito: 
-    precondiciones:
-    tipo:
+    proposito: describe la intensidad del componente "componente" en direccion lindante al "direccion" en caso de no haber retorna 0
+    precondiciones: ninguna
+     tipo: numero
     observaciones:
     */
+
+    return(
+        choose intensidadDelComponente_EnElPixelAl_(componente,direccion) when (puedeMover(direccion))   0 otherwhise)
 }
+
+function intensidadDelComponente_EnElPixelAl_(componente, direccion) {
+    /*
+    proposito: describe la intensidad en el componente "componente" en el pixel al "direccion"
+    precondiciones:
+    tipo: numero
+    observaciones:
+    */
+
+
+    Mover(direccion)
+    return(intensidadDecomponente_Aca(componente))
+}
+
+
