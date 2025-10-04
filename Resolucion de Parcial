@@ -1,0 +1,84 @@
+program {
+
+
+
+}
+
+
+function esPixelSaturadoAca() {
+    /*
+    proposito: indica si el pixel actual esta saturado en alguno de sus componentes 
+    precondiciones: ninguna
+    tipo: booleano
+    observaciones: es un recorrido de busqueda sin saber si existe lo que buscamos sobre componentes para saber si algun componente esta saturado
+    */
+
+    componenteActual := minComponente()
+    while(componenteActual /= maxComponente() && not esComponenteSaturado_(ComponenteActual)) {
+        componenteActual := siguiente(componenteActual)
+    }
+    return(escomponenteSaturado_(componenteActual))
+
+
+}
+
+
+function esComponentesaturado_(componente) {
+    /*
+    proposito: indica si la intensidad del componente actual es mayor a la intensidad en sus lindantes
+    precondiciones: ninguna
+    tipo: booleano
+    observaciones:
+    */
+
+    return( intensidadDeComponente_Aca(componente > intensidadDecomponente_EnLindantes()))
+
+
+}
+
+function intensidadDecomponente_EnLindantes() {
+    /*
+    proposito: describe la intensidad de componente "componente" en sus lindantes
+    precondiciones: ninguna
+    tipo: numero
+    observaciones: es un recorrido de acumulacion sobre direcciones sumando intensidades de los componentes len sus indantes
+    */
+
+    direccionActual := minDir()
+    intensidadHastaAhora := intensidadDeComponente_Al_(componente,direccionActual)
+    while (direcciónActual /= maxDir()) {
+        direcciónActual := siguiente(direcciónActual)
+        intensidadHastaAhora := intensidadHastaAhora + intensidadDeComponente_Al_(componente,direccionActual)
+        }
+        return (intensidadHastaAhora)
+
+
+
+}
+
+function intensidadDeComponente_Al_(componente, direccion) {
+    /*
+    proposito: describe la intensidad del componente "componente" en direccion lindante al "direccion" en caso de no haber retorna 0
+    precondiciones: ninguna
+     tipo: numero
+    observaciones:
+    */
+
+    return(
+        choose intensidadDelComponente_EnElPixelAl_(componente,direccion) when (puedeMover(direccion))   0 otherwhise)
+}
+
+function intensidadDelComponente_EnElPixelAl_(componente, direccion) {
+    /*
+    proposito: describe la intensidad en el componente "componente" en el pixel al "direccion"
+    precondiciones:
+    tipo: numero
+    observaciones:
+    */
+
+
+    Mover(direccion)
+    return(intensidadDecomponente_Aca(componente))
+}
+
+

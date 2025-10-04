@@ -1,0 +1,136 @@
+program {
+
+}
+
+   /*
+    
+    consignas:
+
+    cada celula representa una celda :
+    bolita verde celula viva
+    bolita ninguna verde celula muerta
+    celula vecina en lindantes y diagonales
+
+    ------------------------------------------------------------------------------------------------------------------------------------------
+
+    * Es viva si tiene al menos 2 vecinas vivas escasez
+ 
+    * Si tiene mas de 3 vecinas vivas,muere sobre
+    
+    * Toda celula viva con 2 o 3 vecinas viva pasa a la siguiente generacion
+
+    * Toda celula viva con exactamente 3 vecinas vivas se convierte en celula viva 
+
+    ------------------------------------------------------------------------------------------------------------------------------------------
+
+    Ejercicio   1) Escribir la función esCélulaViva(), que indica si la célula en la celda actual está viva o no.       listo        // retorna
+    
+    Ejercicio   2) Escribir la función nroDeVecinasVivas() que describe el número de células vivas que son vecinas de
+                la célula actual.                                                                                        listo       // acumulacion entre vecinas
+    
+    Ejercicio   3) Escribir PrepararCélulaActual(), que aplique las pautas de juego a la célula actual.                         // transformacion
+    
+    Ejercicio   4) Escribir CompletarElPróximoTick(), que lee todas las marcas de eliminación/reanimación de
+                células y las procesa (es decir, efectivamente elimina/reanima esas células). El resultado será un nuevo universo, en
+                condiciones de poder evolucionar en un tick subsiguiente.
+    
+    Ejercicio   5) Escribir Simular_Ticks(cantidad), que dada una cantidad, simula esa cantidad de ticks sobre el
+    
+    ------------------------------------------------------------------------------------------------------------------------------------------
+
+    */
+
+
+
+function esCelulaViva() {
+    /*
+    proposito: indica si la celula actual esta viva o no
+    precondiciones:
+    tipo: Booleana
+    Observaciones: la celula actual esta viva si tiene una bolita Verde
+    */
+
+    return(hayBolitas(Verde))
+
+}
+
+
+
+
+function nroDeVecinasVivas() {
+    /*
+    proposito: describe la cantidad de celulas vivas al rededor de la celda actual
+    precondiciones: ninguna
+    tipo: numero
+    Observaciones: es un recorrido acumulacion sobre direcciones de una celula buscando cuantas celulas vecinas estan vivas
+    */
+
+        celulaActual := minDir()
+        cantidadVivasHastaAhora := 0
+        while(celulaActual /= maxDir()) {
+            calulaActual := siguiente(celulaActual)
+            cantidadVivasHastaAhora := cantidadVivasHastaAhora + (unoSi_CeroSinoAl_(esCelulaViva(),direccion) + 
+            unoSi_CeroSinoDiagAl_(esCelulaViva(),direccion))
+            }
+            return(cantidadVivasHastaAhora)
+
+}
+
+function unoSi_CeroSinoAl_(condicion,direccion) {
+    /*
+    proposito: describe el numero de vecinas vivas en posicion octogonal de la celda actual
+    precondiciones: debe haber al menos una celda libre en direccion al "direccion"
+    tipo: numero
+    observaciones: un recorrido de acumulacion sobre celulas de un universo, contando la cantidad
+    de celulas vivas que hay vecinas octogonales de la celula actual
+    */
+
+    Mover(direccion)
+    return(unoSi_CeroSino(condicion))
+
+}
+
+funcion unoSi_CeroSinoDiagAl_(condicion,direccion) {
+
+     /*
+    proposito: describe el numero de vecinas vivas en posicion diagonal de la celda actual
+    precondiciones: debe haber al menos una celda libre en la direccion siguiente a "direccion"
+    tipo: numero
+    observaciones: un recorrido de acumulacion sobre celulas de un universo, contando la cantidad
+    de celulas vivas que hay vecinas octogonales de la celula actual
+    */
+
+    Mover(direccion)
+    Mover(siguiente(direccion))
+    return(unoSi_CeroSino(condicion))
+
+
+   
+
+
+}
+
+procedure PrepararCélulaActual() {
+    /*
+    proposito: prepara la celula actual aplicandole las pautas del juego
+    precondiciones: 
+    parametros:
+    observaciones: es un recorrido de transformacion sobre celulas de un universo aplicando los cambios correspondientes de las pautas del juego
+    */
+
+    IrAPrimerElemento()
+    while(haySiguienteCelula()) {
+        
+        IrALaSiguienteCelula()
+        }
+
+
+
+
+}
+
+
+
+
+
+
