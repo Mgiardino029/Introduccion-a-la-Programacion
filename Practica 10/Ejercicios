@@ -22,6 +22,8 @@ type DiaDeLaSemana is variant {
 
 }
 
+// 1.- A)
+
 
 function diaSiguiente_(dia) {
     /*
@@ -41,7 +43,36 @@ function diaSiguiente_(dia) {
         Domingo when (dia == Sabado))
 
     
+}   
+
+
+// 1.- B)
+
+
+function diaPrevio_(dia) {
+    /*
+    proposito: describe el dia previo al dia "dia"
+    precondicion: ninguna
+    parametros: dia : DiaDeLaSemana
+    tipo: DiaDeLaSemana
+    observaciones:
+    */
+
+
+    return( choose Domingo when (dia == Lunes)
+        Lunes when (dia == Martes)
+        Martes when (dia == Miercoles)
+        Miercoles when (dia == Jueves)
+        Jueves when (dia == Viernes)
+        Viernes when (dia == Sabado)
+        Sabado when (dia == Domingo)            )
 }
+
+
+
+// 1.- C)
+
+
 
 function esDiaDeFinDeSemana_(dia) {
     /*
@@ -56,6 +87,59 @@ function esDiaDeFinDeSemana_(dia) {
 
 }
 
+/* Reflexion: el parametro dado en cada funcion es del tipo "dia", las funciones no pueden utilizarse para solucionar este problema ya q es una alternativa condicional. los beneficios
+    que traen diaSiguiente y diaPrevio es que podes llamar es q sabiendo en q dia estas te retorna el dia anterior o el siguiente */
+
+
+
+
+// 2.-
+
+type PartidoPolitico is variant {
+    /*
+    proposito: modelar un partido politico
+    */
+
+    case DemocraciaPorLaVerdad{}
+    case UnidosPorLaRepublica{}
+    case LiberalesPorLaLibertad{}
+    case IzquierdaDeLosObreros{}
+
+
+}
+
+function cantidadDeVotosDe_(unPartido) {
+    /*
+    proposito: indica la cantidad de votos que rceibio un partido
+    parametros:
+    unPartido: PartidoPolitico - el partido politico del cual saber su cantidad de votos
+    tipo: numero
+    precondicion: ninguna
+    */
+
+
+}
+
+// 2.- A)
+
+function tieneMasVotantes_Que_(primerPartidoPolitico, segundoPartidoPolitico) {
+    /*
+    proposito: describe quien tiene mas votos entre "primerPartidoPolitico" y "segundoPartidoPolitico"
+    precondiciones: uno de los dos debe tener mas votos que el otro
+    parametros:
+    primerPartidoPolitico - PartidoPolitico - primer partido politico a comparar
+    segundoPartidoPolitico - PartidoPolitico - segundo partido politico a comparar
+    tipo: PartidoPolitico
+    observaciones: 
+    */
+
+    return(choose primerPartidoPolitico when cantidadDeVotosDe_(primerPartidoPolitico) > cantidadDeVotosDe_(segundoPartidoPolitico)) 
+        segundoPartidoPolitico otherwise
+}
+
+
+
+// 3.-  
 
 
 // program {
@@ -87,6 +171,8 @@ type CartaEspañola is record {
     field numero // numero
 }
 
+// 3.- C)
+
 function laCarta_de_(numeroDeLaCarta, paloDeLaCarta) {
     /*
     proposito: describe la carta de "numeroDeLaCarta* del palo "paloDeLaCarta"
@@ -102,6 +188,8 @@ function laCarta_de_(numeroDeLaCarta, paloDeLaCarta) {
 
 }
 
+// 3.- B)
+
 
 function anchoDeBastos() {
     /*
@@ -116,6 +204,8 @@ function anchoDeBastos() {
 
 }
 
+// 3.- D)
+
 function esUnAncho_(carta){
     /*
     proposito: indica si la carta "carta" es un ancho
@@ -128,6 +218,8 @@ function esUnAncho_(carta){
 
     return (numero(carta) == 1)
 }
+
+// 3.- 
 
 function cartearAncho() {
     /*
