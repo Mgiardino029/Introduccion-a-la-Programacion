@@ -386,4 +386,28 @@ function sinAsignar() {
 }
 
 
+function persona_registradaCon_(personaDniSinAsignar,unDni) {
+    /*
+    prop: describe una persona "persona" registrada con el dni "dni"
+    prec: 
+    tipo: Persona
+    parametros: personaDniSinAsignar
+    dni : unDni
+    */
 
+    return(personaDniSinAsignar(dni <- unDni))
+}
+
+function persona_ConDomicilioNuevoEn_(unaPersona,unDomicilio) {
+    /*
+    proposito: describe una persona "unaPersona" con domicilio nuevo en "unDomicilio*/
+}
+
+return(Persona(unaPErsona|domicilio <- unDomicilio))
+
+
+/*
+
+forma facil de describir empleado solo cambiandole un dato:
+
+return(Empleado(empleado|sueldo <- unSuelto)*/
