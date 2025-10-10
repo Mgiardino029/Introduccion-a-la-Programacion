@@ -78,7 +78,8 @@ function esDiaDeFinDeSemana_(dia) {
     /*
     proposito: indica si el dia dado es un dia de fin de semana
     precondiciones: ninguna
-    parametros: DiaDeLaSemana
+    parametros: 
+    dia: DiaDeLaSemana
     tipo: Bolleano
     Observacion: un dia de fin de semana es Sabado o Domingo
     */
@@ -110,13 +111,20 @@ type PartidoPolitico is variant {
 
 function cantidadDeVotosDe_(unPartido) {
     /*
-    proposito: indica la cantidad de votos que rceibio un partido
+    proposito: indica la cantidad de votos que recibio un partido
     parametros:
     unPartido: PartidoPolitico - el partido politico del cual saber su cantidad de votos
     tipo: numero
-    precondicion: ninguna
+    precondicion: es un recorrido de maximo y minimo entre partidos politicos en busca del partido que tiene mas votos
     */
 
+    partidoActual : = minPartido()
+    elMasVotadoHastaAhora := partidoActual
+    while(partidoACtual /= maxPartido) {
+        partidoActual := siguiente(partidoActual)
+        elMasVotadoHastaAhora := tieneMasVotantes_Que_(partidoActual, elMasVotadoHastaAhora)
+    }
+    return(elMasVotadoHastaAhora)
 
 }
 
@@ -234,6 +242,8 @@ function cartearAncho() {
 }
 
 
+
+
 type Estudiante is record {
 
     field legajo          // numero
@@ -244,3 +254,136 @@ type Estudiante is record {
 
 
 }
+
+//5.- a)
+
+
+type Persona is record {
+    /*
+    proposito: modela una persona
+    */
+
+    field DNI           //String
+    field Domicilio     //String
+    field EsDonante     //Booleano
+    
+
+}
+
+type Empleado is record {
+    /*
+    proposito: modela un empleado
+    */
+
+    field persona   //Persona
+    field Puesto    //Puesto
+    field sueldo    //Numero
+}
+
+type Puesto is variant {
+    /*
+    */
+
+    case Operador{}
+    case LiderDeProyecto{}
+    case Desarrollador{}
+    case GestorDelProyeto{}
+
+}
+
+
+/*
+Ejemplo de como crear una persona
+program {
+
+    return(
+        Persona(domicilio <- "3"
+            dni <- "100"
+            esDonante <- True)    
+        )
+
+}
+*/
+
+
+function personaConDomicilio_Dni_EsDonante_(unDomiiclio,unDni,esDonante) {
+    /*
+    proposito: describe una persona domiciliada en "domicilio" con numero de dni "dni" y "esDonante" es donante
+    precondiciones:
+    tipo: persona //porque es la expresion que da.
+    parametro:
+    unDomicilio: domicilio
+    unDni: dni
+    esDonante: esDonante
+    */
+
+    return(persona(domicilio <- unDomicilio,
+        dni <- unDni,
+        esDonante <- esDonante))
+}
+
+
+/* Ejemplo de llamar a la funcion
+program {
+
+    personaConDomicilio_Dni_esDonante_("3", "100", True)
+
+}*/
+
+/*  Ejemplo de pedirque te de solo el dni
+
+program {
+
+    return(dni(persona)
+
+}
+
+*/
+
+
+// 5.- b
+
+function sonConvivientes_Y_(primeraPersona,segundaPersona) {
+    /*
+    proposito: indica si "primeraPersona" y "segundaPersona" son convivientes
+    precondiciones: ninguna
+    tipo: booleana
+    parametros:
+    primeraPersona: persona
+    segundaPersona: persona
+    */
+
+    return(domicilio(primeraPersona) == domicilio(segundaPersona))
+}
+
+// 5.- C
+
+function personaNacidaDe_(personaMadre) {
+    /*
+    proposito: describe una persona nacida de "personaMadre"
+    precondiciones: ninguna
+    parametros:
+    personaMadre: persona
+    tipo: persona
+    */
+
+    return(Persona(domicilio <- personaMadre, dni <- sinAsignar, esDonante <- False))
+
+}
+
+
+
+function sinAsignar() {
+    /*
+    proposito: describe una persona con dni sin asignar
+    precondiciones:
+    tipo: persona
+    */
+
+    return(persona(domicilio <- persona, dni <- " ", esDonante <- persona ))
+
+    
+}
+
+
+
