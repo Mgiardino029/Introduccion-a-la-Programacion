@@ -1,0 +1,95 @@
+// 3.-  
+
+
+// program {
+
+    return(CartaEspañola(palo <- Basto , numero))
+
+}
+
+
+type Palo is variant {
+    /*
+    proposito: modelar un palo
+    */
+
+    case Basto{}
+    case Espada{}
+    case Copa{}
+    case Oro{}
+}
+
+
+type CartaEspañola is record {
+    /*
+    proposito: modelar una carta española
+    invariante de representacion: el numero esta entre 1 y 12
+    */
+
+    field palo // palo
+    field numero // numero
+}
+
+// 3.- C)
+
+function laCarta_de_(numeroDeLaCarta, paloDeLaCarta) {
+    /*
+    proposito: describe la carta de "numeroDeLaCarta* del palo "paloDeLaCarta"
+    precondiciones: el "numeroDeLaCarta" debe estar entre 1 y 12
+    tipo: CartaEspañola
+    parametros: 
+    numero: numero
+    palo: palo
+    */
+
+    return(CartaEspañola(numero, palo))
+
+
+}
+
+// 3.- B)
+
+
+function anchoDeBastos() {
+    /*
+    proposito: describe la carta ancho de bastos
+    precondiciones: ninguna
+    tipo: CartaEspañola 
+
+    */
+
+
+    return(laCarta_de_(1, Basto))
+
+}
+
+// 3.- D)
+
+function esUnAncho_(carta){
+    /*
+    proposito: indica si la carta "carta" es un ancho
+    precondiciones: ninguna
+    tipo: booleano
+    parametros: 
+    * carta: CartaEspañola
+    observaciones: el ancho son las cartas que tienen numero 1
+    */
+
+    return (numero(carta) == 1)
+}
+
+// 3.- 
+
+function cartearAncho() {
+    /*
+    proposito: describe la carta "carta"a ancho de espada
+    precondiciones: "carta" debe ser un ancho
+    parametros: carta: cartaEspañola
+    tipo: cartaEspañola
+    observaciones:
+    */
+
+    return(CartaEspañola(carta | palo <- Espada))
+}
+
+
