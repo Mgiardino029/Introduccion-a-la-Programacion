@@ -1,0 +1,19 @@
+/*
+repeticion indexada 
+inicializar
+foreach elemento in lista{      elemento se toma como si fuera una variable por cada vuelta
+// procesar elemento            cambia. es como si fuera una manera rapida para acceder 
+}                               al primero de la lista restante
+finalizar
+
+
+se dice indexada porque el primer elemento es el primero de la lista 
+y automaticamente pasa al segundo elemento 
+
+
+
+
+
+
+
+*/

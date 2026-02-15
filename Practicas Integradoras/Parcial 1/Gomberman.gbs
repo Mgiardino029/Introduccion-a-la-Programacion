@@ -1,0 +1,50 @@
+program {
+
+
+
+}
+
+function puntosQueOtorgaríaUnaBombaDePotencia_Aca(potencia) {
+    /*
+    prop: describe cuantos puntos otorgaria una bomba de potencia "potencia" colocada en ubicacion actual o cero si la 
+    ubicacion no es una en la que se pueda colocar una bomba
+    prec: ninguna
+    tipo: numero
+    param:
+    potencia: Numero - numero que describe la potencia de la bomba colocada en la ubicacion actual
+    obs: los puntos otorgados pueden ser negativos
+    */
+
+    return(choose puntosAObtenerPorBombaDePotencia_(potencia) when (not hayObstaculo())
+        0 otherwise)
+
+}
+
+
+function puntosAObtenerPorBombaDePotencia_(potencia) {
+    /*
+    prop: describe los puntos a obtener por una bomba de potencia "potencia" colocada en la ubicacion actual
+    prec: 
+    parametros: 
+    potencia  numero
+    observacion: es un recorrido de acumulacion sobre las direcciones acumulando los puntos obtenidos en cada direccion
+    */
+
+    direccionActual:= minDir()
+    cantidadDePuntosHastaAhora:= 0
+    while(direccionActual/=maxDir()) {
+        direccionActual:= siguiente(direccionActual)
+        cantidadDePuntosHastaAhora:= cantidadDePuntosHastaAhora + puntosHaciaEl_ParaBombaDePotencia_(dirAExplotar,pot)
+    }
+    return(cantidadDePuntos)
+
+    
+
+}
+
+function puntosHaciaEl_ParaBombaDePotencia_(dirAExplotar, potencia) {
+    /*
+    prop: describe los puntos obtenidos hacia el "dirAExplotar" de una bomba de potencia "potencia"
+    */
+
+}

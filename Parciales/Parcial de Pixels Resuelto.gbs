@@ -1,0 +1,312 @@
+function componenteC()
+/*
+PROPÓSITO: Describe la componente “cyan” del píxel
+           actual.
+PRECONDICIONES: Ninguna.
+TIPO: Color
+*/
+
+function componenteM()
+/*
+PROPÓSITO: Describe la componente “magenta” del
+           píxel actual.
+PRECONDICIONES: Ninguna.
+TIPO: Color
+*/
+
+function componenteY()
+/*
+PROPÓSITO: Describe la componente “yellow” del 
+           píxel actual.
+PRECONDICIONES: Ninguna.
+TIPO: Color
+*/
+
+function componenteK()
+/*
+PROPÓSITO: Describe la componente “key” del
+           píxel actual.
+PRECONDICIONES: Ninguna.
+TIPO: Color
+*/
+
+function minComponente()
+/*
+PROPÓSITO: Describe la componente más pequeña.
+PRECONDICIONES: Ninguna.
+TIPO: Color
+*/
+
+function maxComponente()
+/*
+PROPÓSITO: Describe la componente más grande.
+PRECONDICIONES: Ninguna.
+TIPO: Color
+*/
+
+
+function siguienteComponente_(componente)
+/*
+PROPÓSITO: Describe la componente siguiente a 
+           **componente**.
+PRECONDICIONES: Ninguna.
+PARÁMETROS:
+- *componente*: Color - color del componente
+TIPO: Color
+*/
+
+function intensidadDeComponente_Acá(componente)
+/*
+PROPÓSITO: Describe la intensidad de la
+     componente **componente** del píxel actual.
+PRECONDICIÓN: Ninguna.
+PARÁMETROS:
+- *componente* : Color - color del componente
+TIPO: Número.
+*/
+
+procedure IncrementarComponente_Acá(componente)
+/*
+PROPÓSITO: Incrementar en 1 la intensidad de la
+        componente *componente* del píxel actual.
+PRECONDICIONES:
+- La componente *componente* del píxel actual es menor a 255.
+PARÁMETROS:
+- *componente* : Color - color del componente
+*/
+
+procedure DecrementarComponente_Acá(componente)
+/*
+PROPÓSITO: Decrementar en 1 el valor de la
+       componente *componente* del píxel actual.
+PRECONDICIONES:
+- La componente *componente* del píxel actual es
+  mayor a 0.
+PARÁMETROS:
+- *componente* : Color - color del componente
+*/
+
+
+function componenteDeMenorTemperaturaEnLaImagen()
+/*
+PROPÓSITO: Describe a la componente de menor temperatura en la imagen actual.
+PRECONDICIÓN: Existe una componente de menor temperatura en la imagen actual. 
+TIPO: Color
+OBSERVACIÓN: La componente de menor temperatura de una imagen es aquella para la cual la sumatoria de las intensidades de dicha componente en todos los píxeles es la menor.
+*/
+
+function esPixelSaturadoAca(){
+    /*
+        PROP: Indica si el pixel actual se encuentra saturado en algun componente
+        PREC: Ninguna 
+        PARAM: Ninguno
+        TIPO: Booleano
+        OBS: Es un recorrido es un busqueda sin saber que existe sobre componentes
+            para saber si algun componente esta saturado.
+    */
+    componenteActual:= minComponente()
+    while(componenteActual/= maxComponente() 
+            & not esComponenteSaturado_(componenteActual) 
+        ){
+            componenteActual:= siguienteComponente_(componenteActual)
+        }
+    return (esComponenteSaturado_(componenteActual) )
+}
+
+function esComponenteSaturado_(componente){
+    /*
+        PROP: Indica si el componente **componente** esta saturado
+        PREC:  Ninguna
+        PARAM: 
+            - componente: Color, el color que representa el componente que
+                quiero determinar si esta saturado
+        TIPO: Booleano
+        OBS: .
+    */
+    return (
+            intensidadDeComponente_Acá(componente) 
+                >
+            intensidadTotalDeComponenente_EnLindantes(componente)
+            )
+}
+
+function intensidadTotalDeComponenente_EnLindantes(componente){
+   /*
+        PROP: Describe la intensidad total del componente **componente** 
+            en sus pixeles lindantes ortogonales del pixel actual
+        PREC:  Ninguna
+        PARAM: 
+            - componente: Color, es el color del componente a obtener la intensidad
+        TIPO: Numero
+        OBS: Es un recorrido de acumulacion sobre direcciones para sumar 
+                la intensidad del componente en sus lindantes
+    */ 
+    direccionActual = minDir()
+    intensidadHastaAhora:= intensidadDelComponente_Al_(componente, direccionActual)
+    while(direccionActual =/ maxDir()){
+        direccionActual= siguiente(direccionActual)
+        intensidadHastaAhora:=  
+                intensidadHastaAhora 
+                + intensidadDelComponente_Al_(componente, direccionActual)
+    }
+    return (intensidadHastaAhora)
+}
+
+function intensidadDelComponente_Al_(componente, direccion){
+    /*
+        PROP: Describe la intensidad del componente **componente** en direccion
+            lindante al **direccion** caso que no exista describe 0
+        PREC:  Ninguna
+        PARAM: 
+            - componente: Color componente que deseamos saber su intensidad
+            - direccion: Direccion, direccion a la que queremos ir para observar
+        TIPO: Numero
+    */
+    return(
+            choose intensidadDelComponente_EnPixelAl_(componente, direccion)
+                        when (puedeMover(direccion))
+                    0 otherwise
+        )
+}
+
+function intensidadDelComponente_EnPixelAl_(componente, direccion){
+    /*
+        PROP: Describe la intensidad del componente **componente** en direccion
+            lindante al **direccion**.
+        PREC: Hay al menos un pixel en direccion **direccion**
+        PARAM: 
+            - componente: Color componente que deseamos saber su intensidad
+            - direccion: Direccion, direccion a la que queremos ir para observar
+        TIPO: Numero
+    */
+    Mover(direccion)
+    return(intensidadDelComponente_Aca(componente))
+}
+
+procedure SaturarImagenConComponenteDeMayorTemperatura(){
+    /*
+        PROP: Saturar la imagen con el componente de mayor temperatura
+                utilizando como contraste el componente de menor temperatura
+        PREC: Hay un componte de mayor temperatura y un componente de menor
+            temperatura 
+        PARAM: Ninguno
+        OBS: Es un recorrido de transformacion sobre pixeles de la imagen
+                para saturar el comp de mayor temperatura usando el de  
+                menor temp.
+
+    */
+    IrAPrimerPixelDeLaImagen()
+    while(haySiguientePixel()){
+        SaturarComponente_ConComponente_(
+            componenteDeMayorTemperaturaEnLaImagen(),
+            componenteDeMenorTemperaturaEnLaImagen())
+        IrASiguientePixel()
+    }
+    SaturarComponente_ConComponente_(
+            componenteDeMayorTemperaturaEnLaImagen(),
+            componenteDeMenorTemperaturaEnLaImagen())
+}
+
+procedure SaturarComponente_ConComponente_(componenteASaturar, componenteContraste){
+    /*
+        PROP: Satura el componente **componenteASaturar** del pixel actual usando
+            el componente **componenteContraste** de contraste.
+        PREC: Ninguna
+        PARAM: 
+            - componenteASaturar: Color componente a saturar
+            - componenteContraste: Color ocmponente contraste
+    */
+    if (intensidadDeComponenteAca_(componenteASaturar) +
+        intensidadDeComponenteAca_(componenteContraste) <= 255){
+            IncrementarIntensidadDeComponente_Tanto_(
+                componenteASaturar,
+                intensidadDeComponenteAca_(componenteContraste)
+            )
+    }else{
+        IncrementarIntensidadDeComponente_Tanto_(
+                componenteASaturar,
+                255-intensidadDeComponenteAca_(componenteASaturar)
+            )
+    }
+    
+    /*  
+        EstablecerComponente_A_Aca(
+            componenteASaturar, 
+            minimoEntre_Y_(
+                255, 
+                intensidadDelComponente_(componenteASaturar) +
+                intensidadDelComponente_(componenteContraste)
+                )
+            )
+    */
+}
+
+function componenteDeMayorTemperaturaEnLaImagen(){
+    /*
+        PROP: Describe el componente de mayor temperatura en la imagen
+        PREC: Hay uncomponente de mayor tempratura en la imagen
+        PARAM: Ninguno
+        TIPO: Color
+        OBS: Recorrido de maximo-minimo sobre componentes para encontrar el 
+            componente de mayor temperatura.
+    */
+    componenteActual = minComponente()
+    componenteMayorTemperaturaHastaAhora = componenteActual
+    while(componenteActual /= maxComponente()){
+        componenteActual:= siguienteComponente_(componenteActual)
+        componenteMayorTemperaturaHastaAhora =
+            componenteDeMayorTemperaturaEntre_Y_(
+                    componenteActual, 
+                    componenteMayorTemperaturaHastaAhora)
+    }
+    
+    return (componenteMayorTemperaturaHastaAhora)
+}
+
+function componenteDeMayorTemperaturaEntre_Y_(primerComponente, segundoComponente){
+    /*
+        PROP: Describe el componente de mayor temperatura entre los componentes
+            dados. Si son iguales describe el componente **primerComponente**.
+        PREC: Ninguna 
+        TIPO: Color
+        PARAM: 
+            - primerComponente: C
+            - segundoComponente
+        
+    */
+    
+    return (
+            choose primerComponente when ( 
+                            temperaturaComponente_EnImagen(primerComponente)>=
+                            temperaturaComponente_EnImagen(segundoComponente)
+                            )
+                    segundoComponente otherwhise
+        )
+}
+
+function temperaturaComponente_EnImagen(componente){
+    /*
+        OBS: Es un reocrridod e acumulacion sobre pixeles de la imagen
+            para acumular la intensidad del componente dado.
+    */
+    
+    IrAPrimerPixelDeLaImagen()
+    temperaturaComponenteHastaAhora:= intensidadDelComponente_Aca(componente)
+    while(haySiguientePixel()){
+        IrASiguientePixel()
+        temperaturaComponenteHastaAhora:= intensidadDelComponente_Aca(componente)
+    }
+    
+    return (temperaturaComponenteHastaAhora)
+}
+
+procedure IrAPrimerPixelDeLaImagen(){
+  /*
+        PROP: Posiconarse en el inicio de la imagen en el suroeste
+        PREC: Ninguna
+        PARAM: Ninguno
+    */
+  IrAPrimerCeldaEnElRecorridoAl_Y_(Norte, Este)
+}
+
+

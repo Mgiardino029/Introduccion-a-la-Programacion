@@ -1,0 +1,123 @@
+type Persona is record {
+    /*
+    proposito: modela una persona
+    */
+
+    field DNI           //String
+    field Domicilio     //String
+    field EsDonante     //Booleano
+    
+
+}
+
+
+type Empleado is record {
+    /*
+    proposito: modela un empleado
+    */
+
+    field persona   //Persona
+    field puesto    //Puesto
+    field sueldo    //Numero
+}
+
+type Puesto is variant {
+    /*
+    */
+
+    case Operador{}
+    case LiderDeProyecto{}
+    case Desarrollador{}
+    case GestorDelProyeto{}
+
+}
+
+
+/*
+Ejemplo de como crear una persona
+program {
+
+    return(
+        Persona(domicilio <- "3"
+            dni <- "100"
+            esDonante <- True)    
+        )
+
+}
+*/
+
+// 6.- A)
+
+
+function empleado_ConSueldoActualizadoA_(unEmpleado, unSueldo) {
+    /*
+    proposito: describe un empleado "unEmpleado" con su sueldo actualizado a "unSueldo"
+    */
+
+    return(Empleado(unEmpleado | sueldo <- unSueldo))
+}
+
+// 6.- B)
+
+function empleado_ConNuevoPuesto_(unEmpleado, unPuesto) {
+    /*
+    proposito: describe un empleado "unEmpleado" con un nuevo puesto de trabajo de "unPuesto"
+    */
+
+    return(Empleado(unEmpleado | puesto <- unPuesto))
+}
+
+
+// 6.- C)
+
+
+function categoriaDelPuesto_(unPuesto) {
+    /*
+    proposito: describe la categoria del puesto "unPuesto"
+    */
+
+    return(choose 4 when puesto(unPuesto) == GestorDelProyeto,
+        3 when puesto(unPuesto) == LiderDeProyecto,
+        2 when puesto(unPuesto) == Desarrollador,
+        1 otherwise)
+}
+
+// 6.- D)
+
+function empleadoConMayorCargoEntre_Y_() {
+    /*
+    prospotio: describe el empleado con mayor carga entre "primerEmpleado" y "segundoEmpleado"
+    precondiciones: uno tiene mayor cargo que el otro
+    parametros:
+    primerEmpleado: Empleado
+    segundoEmpleado: Empleado
+    tipo: Empleado
+    */
+
+
+    return(choose primerEmpleado when 
+        categoriaDelPuesto_(primerEmpleado) > categoriaDelPuesto_(segundoEmpleado),
+        segundoEmpleado otherwise)
+}
+
+// 6.- E)
+
+
+function tienenIgualSueldo_Y_(primerEmpleado, segundoEmpleado) {
+    /*
+    proposito: indica si el empleado "primerEmpleado" y el empleado "segundoEmpleado
+    cobran igual sueldo
+    precondiciones: ninguna
+    parametros:
+    primerEmpleado: Empleado
+    segundoEmpleado: Empleado
+    tipo: Empleado
+    */
+
+    return (sueldo(primerEmpleado) == sueldo(segundoEmpleado))
+}
+ 
+
+// 6.- F)
+
+

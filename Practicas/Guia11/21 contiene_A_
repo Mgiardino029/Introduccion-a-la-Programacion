@@ -1,0 +1,26 @@
+/*
+ 21.¿Está o no está?
+ BIBLIOTECA Escribir la función contiene_A_, que dada una lista de elementos de cualquier tipo, y un
+ elemento, indica si el elemento dado está en la lista.
+ Ejemplo: contiene_A_([1, 4, 2, 3, 7, 8, 9], 3)describeverdadero,yaque3estáenlalista, mientras
+ que contiene_A_([1, 4, 2, 3, 7, 8, 9], 6)describefalso,yaque6noestáenlalista
+ */
+
+function contiene_A_(lista,elemento) {
+    /*
+    prop:
+    prec:
+    param:
+    lista: Lista de Elementos
+    tipo:booleano
+    obs: es un recorrido de busqueda sin saber si lo que busco esta entre elementos de una lista "lista"
+    buscando el elemento "elemento"
+    */
+
+    listaResultante :=  []
+    while(not esVacia(listaRestante) && not primero(listaResultante) == elemento) {
+        listaResultante := listaResultante := resto(listaResultante)
+        
+    }
+    return(not esVacia() && primero(listaResultante) == elemento)
+}

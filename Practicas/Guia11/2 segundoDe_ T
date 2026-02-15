@@ -1,0 +1,19 @@
+/*
+ El segundo
+ Escribir la función segundoDe_ que dada una lista, describe el segundo elemento de la lista. Puede
+ asumir que la lista tiene al menos dos elementos.
+ */
+
+
+function segundoDe_(lista) {
+    /*
+    proposito: describe el segundo elemento de la lista
+    precondiciones: ninguna
+    parametros:
+    elemento: Lista de Elementos
+    tipo: Elemento
+    */
+
+    return(primero(resto(lista)) //resto se refiere a la lista sin el primer elemento
+
+}

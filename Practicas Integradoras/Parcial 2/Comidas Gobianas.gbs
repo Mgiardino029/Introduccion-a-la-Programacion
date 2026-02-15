@@ -1,0 +1,310 @@
+type ComidaGobiana is record {
+    /* PROPÓSITO: Modela una comida que come un gobiano.
+    INVARIANTES DE REPRESENTACIÓN:
+    * calorías es un número mayor a cero. */
+
+    field nombre // tipo String
+    field origen // tipo Continente
+    field calorías // tipo Número
+}
+
+type Continente is variant {
+    /* PROPÓSITO: Modela un continente de donde puede
+    proceder una comida gobiana. */
+
+    case África {}
+    case América {}
+    case Asia {}
+    case Europa {}
+    case Oceanía {}
+}
+
+/*
+que se puede hacer con un varian? recorrerlo siempre y cuando haya maximo y minimo
+
+tambien se pueden comparar por igual, menor o mayor, desigualdad.
+
+
+funcion es igual o hay diferencia
+*/
+
+
+/*
+Ejercicio 1)
+Como primer ejercicio queremos modelar dos de las comidas Gobianas más típicas, las
+Bolitas de Fraile, y las Bolitas de Queso. Las primeras son una comida originaria de
+América, y tiene 500 calorías. Las segundas, son de Europa, y tienen tan solo 150
+calorías. Se pide implemente entonces:
+Ejercicio a) bolitasDeFraile, una función que describe la comida gobiana
+Bolitas de Fraile.
+Ejercicio b) bolitasDeQueso, una función que describe la comida gobiana
+Bolitas de Queso
+*/
+
+function esBolitaDeFraile() {
+    /*
+    prop: indica si es una bolita de fraile
+    tipo: booleano
+    */
+
+    return(ComidaGobiana(Nombre <- "Bolita De Fraile", Origen <- "America", calorias <- 500 ))
+
+    
+}
+
+function esBolitaDeQueso() {
+    /*
+    prop: indica si es una bolita de queso
+    tipo: booleano
+    */
+
+    return(ComidaGobiana(Nombre <- "Bolita De Queso", Origen <- "Europa", calorias <- 150 ))
+
+    
+}
+
+
+
+
+
+
+/*
+Ejercicio 2)
+Deseamos determinar si, dadas dos comidas gobianas, la primera tiene más calorías que
+la segunda. Para ello, realizar la función tiene_MásCaloriasQue_ que dadas dos
+comidas gobianas, indica sí la primera tiene más calorías que la segunda.
+*/
+
+function tiene_MásCaloriasQue_(primeraComida,segundaComida){
+    /*
+    prop: indica la comida gobiana con mas calorias, en caso de ser iguales retorna la primera
+    prec: una comida es tiene mas calorias que la otra.
+    tipo: booleano
+    */
+
+    return(choose primeraComida when calorias(primeraComida) > calorias(segundaComida),
+        segundaComida when calorias(primeraComida) > calorias(segundaComida) 
+        primeraComida otherwise)
+
+
+
+/*
+Ejercicio 3)
+Además, queremos poder elegir de forma automática la comida más saludable, dadas
+dos comidas gobianas. Para ello, queremos crear la función
+comidaMásSaludableEntre_Y_ que describe la comida gobiana más saludable de las
+dos comidas dadas. La comida más saludable es aquella que tiene menos calorías.
+*/
+
+function comidaMasSaludableEntre_Y_(primeraComida,segundaComida) {
+    /*
+    prop: describe la comida gobiana mas saludable en caso de ser iguales devuelve la primera
+    prec: una es mas saludable que otra
+    tipo: ComidaGobiana
+    */
+
+return(choose primeraComida when calorias(primeraComida) < calorias(segundaComida),
+    segundaComida when calorias(primeraComida) > calorias(segundaComida)
+    primeraComida otherwise)
+}
+
+
+/*
+Ejercicio 4)
+Algunos fanáticos de las comidas gobianas solo comen comidas si provienen de
+determinadas regiones. Por ello, deseamos poder crear la función proviene_De_ que
+dada una comida y un continente indica si una comida proviene del continente dado.
+*/
+
+function proviene_De_(unaComidaGobiana,unContinente) {
+    /*
+    prop:indica si la comida dada proviene del continente dado
+    tipo: booleano
+    */
+
+    return(origen(unaComidaGobiana) == unContinente)
+}
+
+
+/*
+Ejercicio 5)
+Hay gente que tiene la idea de que, si se le unta manteca a una comida, esta se vuelve
+mucho mejor. Por este motivo, se quiere hacer la función comida_enmantecada que
+describe una nueva comida, igual que la dada, pero donde las calorías aumentan en 200.
+Por ejemplo, una bolita de fraile enmantecada es una bolita de fraile de 700 calorías.
+*/
+
+function comida_Enmantecada(unaComidaGobiana) {
+    /*
+    indica si la comida dada es enmantecada
+    tipo: booleano
+    */
+
+    return(ComidaGobiana(unaComidaGobiana | calorias <- calorias() + 200)
+}
+
+/*
+Ejercicio 6)
+Una albondigueada es un tipo de plato que consiste en una serie de albóndigas de carne
+en dónde cada una tiene más calorías que la anterior. Se sirven un total de 5 albóndigas
+con calorías que comienzan en 300 y aumentan de a 100. Se pide que escriba la función
+albondigueada que describe una lista de 5 comidas gobianas donde todas las comidas
+son albóndigas provenientes de Europa, y donde tienen 300, 400, 500, 600 y 700
+calorías.
+*/
+
+function albondigueada() {
+    /*
+    */
+
+    albondigueadaPorAhora:= []
+    caloriasPorAhora:=300
+    repeat(5) {
+        [albondigaDe_Calorias(caloriasPorAhora)]
+        caloriasPorAhora:= caloriasPorAhora + 100
+    }
+    return(albondigueadaPorAhora)
+
+}
+}
+
+
+/*
+Ejercicio 7)
+Hay gobianos que solo comen bolitas de fraile. Si les das una pila de comida, primero,
+buscan a ver si hay efectivamente una bolita de fraile, y si hay, se quedan con la pila de
+comida, sino, la descartan. Por eso, queremos hacer la función
+hayUnaBolitaDeFraileEn_ que dada una lista de comidas, indica si en la pila de comida
+hay alguna cuyo nombre sea “Bolita de Fraile”.
+*/
+
+function hayUnaBolitaDeFraileEn_(pilaDeComida) {
+    /*
+    prop: indica si hay una bolita de fraile en la pila de "pilaDeComida" si hay se quedan con la pila
+    de lo contrario la descartan
+    prec: ninguna
+    tipo:booleano
+    */
+
+    
+
+
+}
+
+
+/*
+Ejercicio 8)
+A los gobianos hay que cuidarlos, por eso, cuando se les lleva comida, hay que analizar
+si no se está pasando de las calorías que un ser humano normal puede consumir. Por
+eso, queremos hacer la función cantidadDeCaloriasDe_ que dada una lista de comidas,
+describe la cantidad total de calorías de los elementos de dicha lista.
+*/
+
+function cantidadDeCaloriasDe_(comidas) {
+    /*
+    prop: describe la cantidad de calorias de comidas de "comidas" para saber si no se esta pasando de la cantidad 
+    de calorias que puede consumir un ser humano normal
+    tipo: 
+    */
+
+    
+
+}
+
+
+/*
+Ejercicio 9)
+Los fanáticos de la manteca son tan obsesivos, que si les das un montón de comida, la
+enmantecan toda, sin miramientos. Por eso queremos hacer la función
+comidasDe_Enmantecadas que dada una lista de comidas, describe una lista del
+mismo tamaño que la original, donde cada elemento se corresponde con la comida en
+dicha lista, pero enmantecada.
+*/
+
+
+function comidasDe_Enmantecadas(comidas) {
+    /*
+    prop: describe una lista igual a la lista "comidas" pero dicha lista esta enmantecada
+    tipo: ComidasGobianas
+    */
+
+
+
+
+}
+
+
+/*
+Ejercicio 10)
+Algunos gobianos son muy quisquillosos, y solo comen comidas que verdaderamente los
+dejen como bolitas a ellos. Por ello, si les das mucha comida, solamente elegirán comer
+aquellas comidas que tengan más de 500 calorías. Se desea la función
+comidasPulentaDe_ que dada una lista de comidas, describe una lista que tiene
+solamente aquellas comidas de la lista original que tienen más de 500 calorías.
+*/
+
+/*
+Ejercicio 11)
+En el mundo Gobiano hay también Chefs, que se han vuelto muy renombrados por sus
+recetas. Queremos poder modelar a un chef y las recetas de los mismos.
+type ChefGobiano is record {
+PROPÓSITO: Modela un chef de comida gobiana.
+field nombre // tipo String
+field recetas // tipo Lista de ComidaGobiana
+}
+Nos interesará saber diversas cosas de un Chef, pero por el momento solo queremos
+modelar al Chef “Simón Bolitas”, el gran cocinero que ha dado origen a todo este
+movimiento. Cree la función simonBolitas que describe al chef con su repertorio de
+comidas, que incluyen solamente las bolitas de fraile y las bolitas de queso.
+*/
+
+/*
+Ejercicio 12)
+Para ir cerrando esta sección queremos saber si un chef es demasiado light. Un chef es
+demasiado light si ninguna de las comidas que sabe preparar es una comida pulenta.
+Elabore la función es_MuyLight que indique si ninguna de las comidas del chef dado es
+pulenta.
+*/
+
+/*
+Ejercicio 13)
+Queremos saber también cuántas comidas pulenta sabe preparar un chef. Para ello,
+elabore la función cantidadDeComidasPulentaDe_ que describa la cantidad total de
+comidas pulenta (de más de 500 calorias) que el chef sabe preparar.
+*/
+
+
+/*
+Ejercicio 14)
+Los Chefs conocen recetas de todo el mundo. Dado un chef, podemos querer saber que
+comidas conoce de un continente. Para ello, pedimos realice comidasDe_DelChef_, una
+función que dado un continente y un chef describe la lista de comidas del continente
+dado que el chef sabe preparar.
+*/
+
+
+/*
+Ejercicio 15)
+Algunos Chefs atienden tan bien a los comensales que escuchan todos sus caprichos.
+Tal es así, que sí atienden a un gobiano que gusta de enmantecar comida, enmantecan
+todo su menú. Escriba la función chef_ConSuMenuEnmantecado que dado un chef,
+describe al chef con la totalidad de sus recetas enmantecadas.
+LISTAS DE REGISTROS QUE TIENEN LISTAS
+*/
+
+
+/*
+Ejercicio 16)
+Queremos saber también, dado una serie de chefs, cual es el que sabe preparar bolitas
+de fraile. Se desea escriba la función nombreDelChefEn_QuePrepara_ que dada una
+lista de chefs, y el nombre de una comida, describe el nombre del chef que prepara dicha
+comida (seguro hay algún chef que prepara esa comida en la lista, y si hay más de uno,
+describe el primero de ellos).
+*/
+
+/*
+Ejercicio 17)
+Por último deseamos saber también cual es el chef más pulenta de una lista de chefs. Se
+pide escriba a función nombreDeChefMásPulentaEn_ que describe el nombre del chef
+que prepara mayor cantidad de comidas pulenta.
+*/

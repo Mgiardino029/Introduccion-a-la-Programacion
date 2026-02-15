@@ -1,0 +1,191 @@
+program {
+
+
+
+}
+
+
+// 1)
+
+
+function puedenGanarBatallaMagosContraMortifagos() {
+    /*
+    prop: indica si los magos pueden derrotar a los mortifagos en una batalla
+    prec: ninguna
+    tipo: booleano
+    */
+
+    return(poderMagicoDeCategoria_(categoriaMago() > poderMagicoDeCategoria_(categoriaMortifago())))
+}
+
+function poderMagicoDeCategoria_(categoria) {
+    /*
+    prop: describe el poder magico de la categoria "categoria"
+    prec: ninguna
+    tipo: booleana
+    parametro:
+    categoria: numero- numero que indica la categoria del personaje
+    observaciones: es un recorrido de acumulacion sobre habitaciones de Gobwarts buscando cual es el poder total de la categoria
+    */
+
+    IrAPrimeraHabitacion()
+    poderMagicoAcumuladoHastaAhora:= poderMagicoDePersonajeCategoria_SiHay(categoria)
+    while(haySiguienteHabitacion()) {
+        IrASiguienteHabitacion()
+        poderMagicoAcumuladorHastaAhora:= poderMagicoAcumuladoHastaAhora + poderMagicoDePersonajeCategoria_SiHay(categoria)
+    }
+    return(poderMagicoacumuladoHastaAhora)
+
+
+
+    function poderMagicoDePersonajeCategoria_SiHay(categoria) {
+        /*
+        prop: describe el poder magico del personaje categoria "categoria" si hay, de lo contrario retorna 0
+        prec: ninguna
+        tipo: numero
+        parametros:
+        categoria: numero - numero que indica la categoria del personaje
+        */
+
+        return(choose poderMagicoDelPersonaje() when (hayPersonajeDeCategoria_(categoria))
+            0 otherwise)
+    }
+
+
+    // 2)
+
+
+    function estáElSeñorGobscuroEnGobwarts(){
+        /*
+        prop: indica si el señor gobscuro esta en gobwarts
+        prec: ninguna
+        tipo: booleana
+        obs: es un recorrido de busqueda sin saber si lo que busco esta, sobre habitaciones para saber si el señor gobscuro
+        esta en gobwarts
+        */
+
+        IrAPrimeraHabitacion()
+        while(haySiguienteHabitacion() && not estaElSeñorGobscuroAca()) {
+            IrASiguienteHabitacion()
+        }
+        return(estaElSeñorGobscuroAca())
+
+
+
+    }
+
+
+    function estaElSeñorGobscuroAca() {
+        /*
+        prop: indica si el señor gobscuro esta en esta habitacion
+        prec: hay un personaje en la habitacion actual
+        tipo: booleana
+        */
+
+        return(tipoDeHabitacion() == habitacionMazmorras() && esElSeñorGobscuro())
+
+    }
+
+    function esElSeñorGobscuro() {
+        /*
+        prop: indica si el personaje de la habitacion es el señor gobscuro
+        prec: ninguna
+        tipo: booleana
+        observaciones: el señor gobscuro es un mortifago el cual tiene podermagico 1 ya que se esta escondiendo
+        */
+
+        return(hayPersonajeCategoria(categoriaMortifago) && poderMagicoDelPersonaje() == 1)
+
+    }
+
+    // 3)
+
+    procedure EliminarEnemigosPorDestrucciónDelDiario() {
+        /*
+        prop: elimina todos los dementores y mortifagos de las habitaciones de gobwarts
+        prec: ninguna
+        obs: es un recorrido de transformacion entre habitaciones de gobwars eliminando dementores y mortifagos
+        */
+
+
+        IrAPrimeraHabitacion()
+        while(haySiguienteHabitacion) {
+            EliminarEnemigos()
+        }
+        EliminarEnemigos()
+
+
+    }
+
+
+    procedure EliminarEnemigos() {
+        /*
+        prop: elimina los enemigos de la habitacion actual
+        precon: ninguna
+        */
+
+        if(hayPersonajeCategoria_(categoriaMortifago()) || hayPersonaje(categoriaDementor())) {
+            EliminarPersonaje()
+        }
+    }
+
+
+    // 4)
+
+    function categoriaDePersonajeConMayorPoderMágico() {
+        /*
+        prop: describe la categoria del personaje que posee el mayor poder magico en todo gobwarts
+        prec: hay 1 personaje mas poderoso que los demas
+        tipo: numero
+        obs: es un recorrido de maximo y minimo entre categorias de gobwarts buscando la categoria que contenga
+        el personaje con mayor poder magico
+        */
+        
+        categoriaActual:= minCategoria()
+        categoriaMasPoderosaHastaAhora:= categoriaActual() 
+        while(categoriaActual/= maxCategoria()) {
+            categoriaActual:= siguiente(categoriaActual)
+            categoriaMasPoderosaHastaAhora:= categoriaMasPoderosaEntre_Y_(categoriaMasPoderosaHastaAhora, categoriaActual)
+        }
+        return(categoriaMasPoderosaHastaAhora)
+
+
+
+    }
+
+    function categoriaMasPoderosaEntre_Y_(primeraCategoria,segundaCategoria) {
+        /*
+        prop: describe la categoria mas poderosa entrea "primeraCategoria" y "segundaCategoria"
+        prec: una categoria es mas poderosa que la otra
+        tipo: numero
+        parm:
+        primeraCategoria: Numero- numero que describe la primeraCategoria a evaluar
+        segundaCategoria: Numero- numero que describe la segundacategoria a evaluar
+        */
+
+        return(choose primeraCategoria when personajeMasPoderosoDeCategoria_(primeraCategoria) > personajeMasPoderosoDeCategoria__(segundaCategoria)
+            segundaCategoria otherwise)
+
+
+    }
+
+    function personajeMasPoderosoDeCategoria_(categoria) {
+        /*
+        prop: describe el personaje mas poderoso de la categoria "categoria"
+        prec: debe haber 1 persona mas poderoso que los demas
+        tipo: 
+        obs: es un recorrido de maximo minimo entre personajes de una categoria
+        para encontrar el personaje que tenga mayor poder magico
+        */
+
+        IrAPrimeraHabitacion()
+        elPersonajeMasPoderosoHastaAhora:=poderMagicoDePersonajeCategoria_SiHay()
+        while(haySiguienteHabitacion) {
+            IrASiguienteHabitacion()
+            elPersonajeMasPoderosoHastaAhora:=personajeMasPoderosoEntre_Y_(elPersonajeMasPoderosoHastaAhora,
+             poderMagicoDePersonajeCategoria_SiHay())
+
+        }
+        return(elPersonajeMasPoderosoHastaAhora)
+        }
+    }

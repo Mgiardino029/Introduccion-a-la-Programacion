@@ -1,0 +1,107 @@
+// Componentes = colores
+// Pixel = celda
+// Imagen = Tablero
+
+
+function esPixelSaturadoAca_() {
+    /*
+    prop: indica si el pixel actual esta saturado en alguno de sus componentes
+    prec: ninguna
+    tipo: booleana
+    obs: es un recorrido de busqueda sin saber si lo que busco esta, sobre componentes de un pixel, buscando si uno
+    de sus componentes de encuentra saturado
+    */
+
+    componenteActual:=minComponente()
+    while (componenteActual /= maxComponente() && not esComponente_Saturado(componente)) {
+    componenteActual:= siguiente(componenteActual)
+    }
+    return ( esComponente_Saturado(componente))
+    }
+
+
+function esComponente_saturado(componente) {
+    /*
+    prop: indica si el componente "componente" es un componente saturado
+    prec: ninguna
+    tipo: booleana
+    param:
+    componente: Componente - describe el componente a evaluar
+    */
+
+    return(intensidadDeComponente_Aca(componente) > intensidadDeComponente_EnLindantes(componente))
+
+
+}
+
+function intensidadDeComponente_EnLindantes(componente) {
+    /*
+    prop: describe la intensidad del componente "componente" en las celdas lindantes
+    prec: ninguna
+    tipo: numero
+    param:
+    componente: Componente - describe el componente a evaluar
+    obs: es un recorrido de acumulacion sobre direcciones
+    */
+
+    direcciónActual := minDir()
+    intensidadTotalDeComponenteHastaAhora := intensidadDeComponente_Aca(direcciónActual)
+    while (direcciónActual /= maxDir()) {
+        direcciónActual := siguiente(direcciónActual)
+        intensidadTotalDeComponenteHastaAhora := intensidadTotalDeComponenteHastaAhora 
+        + intensidadDeComponente_LindanteAl_(componente,direccion)
+    }
+    return ( ntensidadTotalDeComponenteHastaAhora 
+        + intensidadDeComponente_LindanteAl_(componente,direccion) )
+
+}
+
+function intensidadDeComponente_LindanteAl_(componente,direccion) {
+    /*
+    prop: describe la intensidad del componente "componente" en direccion "direccion"
+    prec: ninguna
+    tipo: Numero
+    param:
+    componente: Color - describe el color del componente a evaluar
+    direccion: Direccion -  describe la direccion del pixel lindante a evaluar
+    */
+
+    return(puedeMover(direccion) && intensidadDeComponente_Al_(componente,direccion))
+
+}
+
+
+function intensidadDeComponente_Al_(componente,direccion) {
+    /*
+    prop: describe la intensidad del componente "componente" en direccion "direccion"
+    prec: ninguna
+    param:
+    componente: Color - describe el color del componente a evaluar
+    direccion: Direccion -  describe la direccion del pixel lindante a evaluar
+    */
+
+
+    Mover(direccion)
+    return(intensidadDeComponente_Aca(componente))
+}
+
+
+function componenteDeMayorTemperatura() {
+    /*
+    prop: describe el componente de mayor temperatura en la imagen 
+    prec: ninguna
+    tipo: Color
+    obs: es un recorrido de maximo y minimo entre componentes de una imagen, en busca del componente de mayor temperatura
+    */
+
+    componenteActual:= minComponente()
+    componenteConMayorTempHastaAhora:= componenteActual
+    while (componenteActual /= maxComponente()) {
+        componenteActual := siguiente(componenteActual)
+    componenteConMayorTempHastaAhora := componenteConMayorTempEntre_Y_(componenteActual, componenteConMayorTempHastaAhora)
+    }
+    return (componenteConMayorTempHastaAhora)
+
+}
+
+

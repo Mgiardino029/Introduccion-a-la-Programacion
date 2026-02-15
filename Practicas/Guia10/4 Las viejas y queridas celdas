@@ -1,0 +1,38 @@
+type Celda is record {
+    /*
+    proposito: modelar una celda del tablero
+    Inv.Rep: Los numeros son todos >=0
+    */
+    field cantidadDeAzules  // tipo:numero
+    field cantidadDeNegras  // tipo:numero
+    field cantidadDeRojas   // tipo:numero
+    field cantidadDeVerdes  // tipo:numero
+}
+
+//4.- A)
+
+
+function celdaActual() {
+    /*
+    proposito:
+    precondiciones:
+    tipo:
+    */
+
+    return(Celda)
+}
+
+//4.- B)
+
+procedure EscribirUnaCelda_(celda) {
+    /*
+    proposito: escribir la informacion de una celda "celda" en el tablero
+    precondiciones:
+    parametros: 
+    celda: celda - celda de donde se obtiene la informacion para transcribir en el tablero 
+    observaciones:
+    */
+
+    
+
+}

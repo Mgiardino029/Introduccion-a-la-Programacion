@@ -1,0 +1,248 @@
+// 3.-  
+
+
+// program {
+
+    return(CartaEspañola(palo <- Basto , numero))
+
+}
+
+
+type Palo is variant {
+    /*
+    proposito: modelar un palo
+    */
+
+    case Basto{}
+    case Espada{}
+    case Copa{}
+    case Oro{}
+}
+
+
+type CartaEspañola is record {
+    /*
+    proposito: modelar una carta española
+    invariante de representacion: el numero esta entre 1 y 12
+    */
+
+    field palo // palo
+    field numero // numero
+}
+
+// 3.- B)
+
+
+function anchoDeEspadas() {
+    /*
+    proposito: describe la carta ancho de bastos
+    precondiciones: ninguna
+    tipo: CartaEspañola 
+
+    */
+
+
+    return(CartaEspañola(palo <- Espada, numero <- 1))
+
+}
+
+// 3.- B)
+
+
+function anchoDeBastos() {
+    /*
+    proposito: describe la carta ancho de bastos
+    precondiciones: ninguna
+    tipo: CartaEspañola 
+
+    */
+
+
+    return(CartaEspañola(palo <- Basto, numero <- 1))
+
+}
+
+// 3.- C)
+
+
+function laCarta_de_(numeroDeLaCarta, paloDeLaCarta) {
+    /*
+    proposito: describe la carta de "numeroDeLaCarta* del palo "paloDeLaCarta"
+    precondiciones: el "numeroDeLaCarta" debe estar entre 1 y 12
+    tipo: CartaEspañola
+    parametros: 
+    numero: numero
+    palo: palo
+    */
+
+    return(CartaEspañola(numero, palo))
+
+
+}
+
+
+
+// 3.- D)
+
+function esUnAncho_(carta){
+    /*
+    proposito: indica si la carta "carta" es un ancho
+    precondiciones: ninguna
+    tipo: booleano
+    parametros: 
+    * carta: CartaEspañola
+    observaciones: el ancho son las cartas que tienen numero 1
+    */
+
+    return (numero(carta) == 1)
+}
+
+// 3.- E)
+
+function esFigura_(carta) {
+    /*
+    proposito: indica si la carta "carta" es una figura
+    precondiciones: ninguna
+    tipo:booleano
+    parametros:
+    carta: CartaEspañola
+    observaciones: la figura es una carta de cualquier palo pero que el numero sea del 10 al 12
+    */
+
+    return(numero(carta) == 10 || numero(carta) == 11 || numero(carta) == 12)
+}
+
+//3.- F)
+
+function esDeOro(){
+    /*
+    proposito: indica si la carta "carta* es de palo Oro
+    precondiciones: ninguna
+    tipo: booleano
+    observaciones: 
+    */
+
+    return(palo(carta) == Oro)
+}
+
+
+//3.- G)
+
+function tieneUnNumeroMasGrande_Que_(primeraCarta,segundaCarta) {
+    /*
+    proposito: indica si la carta "primeraCarta" es mas grande que la carta "segundaCarta"
+    precondiciones: una debe ser mas grande que la otra
+    tipo: booleano
+    parametros:
+    primeraCarta: CartaEspañola primera carta a comparar
+    segundaCarta: CartaEspañola segunda carta a comparar
+    */
+
+    return(numero(primeraCarta) > numero(segundaCarta))
+}
+
+
+//3.- H)
+
+function sonDelMismoPalo_Y_(primeraCarta,segundaCarta) {
+    /*
+    proposito: indica si la carta "primeraCarta" y la carta "segundaCarta" tienen el mismo palo
+    precondiciones: ninguna
+    tipo: booleano:
+    parametros:
+    primeraCarta: CartaEspañola - describe la primeraCarta a comparar
+    segundacarta: CartaEspañola - describe la segundaCarta a comparar
+    */
+
+    return(palo(primeraCarta) == palo(segundaCarta))
+}
+
+
+//3.- I)
+
+function valorParaEnvidoDe_(carta) {
+    /*
+    proposito: describe el numero que aporta la carta "carta" a sumar al envido
+    precondiciones: ninguna
+    tipo: numero
+    parametro: 
+    carta: CartaEspañola - describe la carta a evaluar para los puntos del envido
+    */
+
+    return(choose numero(carta) when not esFigura_(carta)
+        o otherwise)
+
+}
+
+//3.- J)
+
+function mayorValorEntre_Y_(primeraCarta,segundaCarta) {
+    /*
+    proposito: decsrie el valor mas grande entre dos cartas segun lo que aportan para el envido
+    precondiciones: ninguna
+    tipo: numero
+    parametros:
+    primeraCarta: CartaEspañola - primeraCarta a evaluar para la comparacion
+    segundaCarta: CartaEspañola - segundaCarta a evaluar para la comparacion
+    observaciones: si las cartas por ejemplo son un 7 y un 12, describe 7 ya que el 12 no aporta para el envido
+    */
+
+    return(choose valorParaEnvidoDe_(primeraCarta) when valorParaEnvidoDe_(primeraCarta) > valorParaEnvidoDe_(segundaCarta)
+        valorParaEnvidoDe_(segundaCarta) otherwise)
+}
+
+
+//3.- K)
+
+function sumaParaElEnvidoCon_Y_(primeraCarta,segundaCarta) {
+    /*
+    proposito: describe el numero de envido que se obtiene entre la carta "primeraCarta" y la carta "segundaCarta"
+    precondiciones: ninguna
+    tipo: numero
+    parametros:
+    primeraCarta: CartaEspañola - describe la primeraCarta a evaluar para la suma de tantos
+    segundaCarta: CartaEspañola - describe la segundaCarta a evaluar para la suma de tantos
+    */
+
+    return(choose valorParaEnvidoDe_(primeraCarta) + valorParaEnvidoDe_(segundaCarta) when sonDelMismoPalo_Y_(primeraCarta,segundaCarta)
+        mayorValorEntre_Y_(primeraCarta,segundaCarta) otherwise)
+
+}
+
+//3.- L)
+
+function sonMejores_Y_Que_y_(primeraCartaPrimerJugador,segundaCartaPrimerJugador,primeraCartaSegundoJugador,segundaCartaSegundoJugador) {
+    /*
+    proposito: indica si el envido del primer jugador es mas grande que el envido del segundo jugador
+    precondiciones: ninguna
+    tipo: booleano
+    parametros:
+    primeraCartaPrimerJugador: carta - primera carta a evaluar el envido del primer jugador
+    segundaCartaPrimerJugador: carta - segunda carta a evaluar el envido del primer jugador
+    primeraCartaSegundoJugador: carta - primera carta a evaluar el envido del segundo jugador
+    segundaCartaSegundoJugador: carta - segunda carta a evaluar el envido del segundo jugador
+    */
+
+    return(sumarParaEnvidoCon_Y_(primeracartaPrimerJugador,segundaCartaPrimerJugador) > sumaParaEnvidoCon_Y_(primeraCartaSegundoJugador,segundaCartaSegundoJugador))
+
+}
+
+
+
+
+
+// 3.- 
+
+function cartearAncho() {
+    /*
+    proposito: describe la carta "carta"a ancho de espada
+    precondiciones: "carta" debe ser un ancho
+    parametros: carta: cartaEspañola
+    tipo: cartaEspañola
+    observaciones:
+    */
+
+    return(CartaEspañola(carta | palo <- Espada))
+}
+
+

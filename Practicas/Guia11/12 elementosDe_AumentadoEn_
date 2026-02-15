@@ -1,0 +1,29 @@
+/*
+ 12.Aumentados
+ Escribir la función elementosDe_aumentadosEn_, que dada una lista de números, y un número que
+ representa una cantidad a aumentar, describe la lista en donde cada elemento fue aumentado en la
+ cantidad dada .1
+ Ejemplo: elementosDe_aumentadosEn_([1,5,7,9], 3) describe la lista [4,9,10,12]
+*/
+
+
+function elementoDe_AumentadoEn_(numeros, cantAumentar) {
+    /*
+    prop:
+    prec:
+    param:
+    numero: Lista de Numeros
+    cantAumentar: numero
+    tipo: Lista de Numero
+    obs:
+    */
+
+    listaResultante :=  []
+    numerosRestantes := numeros
+    while(not esVacia(numerosRestantes)) {
+        listaResultante := listaResultante ++ primeroDe_Aumentado(primero(numerosRestantes), cantAumentar)
+        numerosRestantes := resto(numerosRestantes)
+    }
+    return(listaResultante)
+
+}

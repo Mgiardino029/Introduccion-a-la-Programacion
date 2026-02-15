@@ -1,0 +1,31 @@
+/*
+ La tira de cartas
+ Para un juego particular se necesita armar “tiras” de cartas. Una tira de cartas es una secuencia de
+ cartas en orden creciente, es decir, una lista con un orden particular. Para agregar una carta a una tira
+ (al comienzo de la misma), esta debe ser de diferente palo y menor a la primera carta de la tira. Se pide
+ entonces que escriba las siguientes funciones:
+ a. primerasTresCartasDeLaTira_, que dada una “tira”, describe una lista con las primeras 3
+ cartas de la misma
+ b. laMano_TieneJugadaParaAgregarALaTira_, que dada una mano y una tira, indique si la
+ primera carta que puede jugar el jugador puede ser agregada en la tira o no.
+ c. laTira_DespuésDeJugar_, que dada una tira de cartas y una carta que cumple las
+ condiciones para ser agregada en la misma, describa la tira que resulta de jugar esa carta en
+ esa tira
+ */
+
+
+
+function primerasTresCartasDeLaTira_(tira) {
+    /*
+    prop: describe las primeras 3 cartas de la tira "tira"
+    prec: ninguna
+    param:
+    tira: Lista de Cartas
+    tipo: carta
+    */
+
+    function sigueRectaEn_() {
+    }
+
+
+}

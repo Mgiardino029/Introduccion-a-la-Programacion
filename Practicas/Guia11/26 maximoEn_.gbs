@@ -1,0 +1,35 @@
+/*
+ El más grande de la lista
+ BIBLIOTECA Escribir la función máximoEn_, que dada una lista de números describe el número más
+ grande en la lista.
+ Ejemplo: máximoEn_([5, 4, 2, 3, 7, 8, 9])describe9.
+*/
+function maximoEn_(numeros)
+/*
+prop:
+prec: un elemento es mas grande que los demas
+param:
+numeros: Lista de Numeros
+tipo: Numero
+obsev: es un recorrido de maximo y minimo entre elementos de una lista "numeros" buscando el 
+elemento maximo
+*/
+
+maxHastaAhora := primero(numeros)
+listaRestante := resto(numeros)
+while(not esVacia()) {
+    maxHastaAhora := maximoEntre_Y_(maxHastaAhora, primero(listaResultante))
+}
+return(maximoHastaAhora)
+
+//usando foreach
+
+function maximoEn_(numeros) {
+
+    maximoHastaAhora := primero(numeros)
+    foreach numero in resto(numeros) {  //de esta forma no evalua el primer numero 2 veces
+        maxHastaAhora := maximoEntre_Y_(maxHastaAhora, numero))
+    }
+    return(maximoHastaAhora)
+
+}

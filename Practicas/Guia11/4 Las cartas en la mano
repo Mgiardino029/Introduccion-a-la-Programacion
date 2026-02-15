@@ -1,0 +1,79 @@
+ /*
+ Las cartas en la mano
+ Cuando jugamos a las cartas, las cartas que un jugador sostiene en la mano pueden ser pensadas
+ como una lista, en donde el orden es aquel en el que el jugador va a lanzar las cartas a la mesa.
+ Llamamos “mano” a esta lista de cartas. También podemos pensar en un mazo como una lista de
+ cartas, ordenadas de forma tal que la primera carta de la lista es el tope del mazo. Vamos a llamar
+ “mazo” a esta lista. El tipo de los elementos de estas listas es Carta, que ya vimos y usamos en la
+ práctica anterior. Con esto en mente se pide que escriba algunas funciones para un juego de cartas
+ genérico.
+ a. primerCartaDeLaMano_, que dada una “mano” describa la primera carta a jugar.
+ b. segundaCartaDeLaMano_, que dada una “mano”, describa la segunda carta a jugar.
+ c. tercerCartaDeLaMano_, que dada una “mano”, describa la tercera carta a jugar.
+ d. laMano_LuegoDeRobarUnaCartaDe_, que dada una “mano” y un “mazo” describe la mano
+ resultante luego de robar la primera carta del mazo y agregarla a la mano del jugador.
+ e. laMano_LuegoDeJugarUnaCarta, que dada una “mano”, describe la mano resultante luego
+ de jugar la próxima carta de la mano.
+ f.
+ laMano_LuegoDeJugarLaSegundaCarta, que dada una “mano”, describe la mano
+ resultante luego de jugar exclusivamente la segunda de las cartas
+ */
+
+// 4.- A)
+
+function primeraCartaDeLaMano_(mano) {
+    /*
+    proposito: describe la primera carta de la mano dada
+    precondiciones: ninguna
+    parametros:
+    mano: Lista de Elementos
+    tipo: Carta
+    */
+
+    return(primero(mano))
+    
+
+}
+
+// 4.- B)
+
+function segundaCartaDeLaMano_(mano) {
+    /*
+    prosposito: describe la segunda carta de la mano dada
+    precondiciones:
+    parametros:
+    mano: Lista de Elementos
+    tipo: carta
+    */
+
+    return(primero(resto(mano)))
+}
+
+
+// 4.- C)
+
+function laMano_LuegoDeRobarUnaCartaDe_(mano,mazo) {
+    /*
+    proposito: describe la "mano" resultante luego de robar la primera carta del "mazo" 
+    y agregarla a la mano del jugador
+    precondiciones:
+    parametros:
+    mano: Lista de Elementos
+    mazo: Lista de Elementos
+    tipo: carta
+    */
+
+    return(cons(primero(mazo), mano))
+
+}
+
+// 4.- D)
+
+function laMano_LuegoDeJugarUnaCarta() {
+    /*
+    proposito: describe la mano resultante luego de jugar la proxima carta de la mano
+    precondiciones: mano debe ser una lista con al menos una carta
+    parametros:  
+    tipo: Carta
+     */
+}

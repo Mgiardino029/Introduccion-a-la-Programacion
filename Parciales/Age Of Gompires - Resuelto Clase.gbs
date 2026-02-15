@@ -1,0 +1,245 @@
+// 1)
+
+
+function puntosAObtenerenSector{
+    /*
+    proposito: describe los puntos a obtener en sector
+    precondicion: ninguna
+    tipo: numero
+    observaciones: el puntaje a obtener por las siguientes reglas:
+        15 puntos si hay oro o alimento
+        10 puntos si hay piedra o madera
+        10 puntos adicionales si hay todos los recursos en el sector
+    */
+
+    return(puntosAObtener15SiHayOroOAlimento() + puntosAObtener10SiHayPiedraOMadera() + puntosAdicionales())
+}
+
+
+function puntosAObtener15SiHayOroOAlimento() {
+    /*
+    proposito: describe 15 puntos a obtener si hay recurso oro o alimento sino cero
+    precondiciones: ninguna, funcion total
+    tipo: numero
+    */
+
+    return(choose 15 when(hayRecurso_EnSector(recursoOro()) || hayRecurso_EnSector(recursoAlimento())) 
+        o otherwise)
+}
+
+function puntosAObtener10SiHayPiedraOMadera() {
+    /*
+    proposito: describe 10 puntos a obtener si hay recurso piedra o madera sino cero
+    precondiciones: ninguna, funcion total
+    tipo:numero
+    */
+
+    return(chose 10 when(hayRecurso_EnSector(recursopiedra()) || hayRecurso_EnSector(recursoMadera()))
+}
+
+function puntosAdicionales() {
+    /*
+    proposito: describe 10 puntos adicionales si estan todos los recursos en el sector
+    precondiciones:ninguna, funcion total
+    */
+
+    return(choose 10 when (hayRecurso_EnSector(recursoOro()) && hayRecurso_EnSector(recursoAlimento()) && hayRecurso_EnSector(recursoPiedra()) 
+        && hayRecurso_EnSector(recursoMadera()))
+}
+
+function hayRecurso_EnSector(unRecurso) {
+    /*
+    proposito:indica si hay un recurso "unRecurso" en la parcela actual o en sus lindante
+    precondiciones:ninguna, operacion total
+    tipo:booleano
+    obs: es un recorrido de busqueda sobre parcelas de un sector para saber si hay recurso dado en la parcela actual o sus lindantes
+    */
+
+    direccionActual := minDir()
+    while(direccionActual /= maxDir() && not hayRecurso_AcaOLindanteAl_(unRecurso, direccionActual)){
+        direccionActual:= siguiente(direccionActual)
+    }
+
+return(hayRecurso_AcaOLindanteAl_(unRecurso,direccionActual))
+}
+
+
+function hayRecurso_AcaOLindanteAl_(unRecurso, unaDireccion) {
+    /*
+    proposito: indicar si hay recursos "unRecurso" en la parcela actual o en la lindante en direccion a "unaDireccion"
+    precondiciones: ninguna, funcion total
+    parametros:
+    unRecurso: Color - color que representa un recurso
+    unaDireccion: Direccion - direccion que representa la direccion donde se va a ver parcela
+    tipo: Booleano
+    */
+
+    return(hayRecurso_Aca(unRecurso) || hayRecurso_EnLindanteAL_(unRecurso,unaDireccion))
+}
+
+functino hayRecurso_EnLindanteAL_(unRecurso, unaDireccion) {
+    /*
+    proposito:indica si hay un recurso "unRecurso" en parcela al "unaDireccion"
+    precondicion: ninguna, funcion total
+    parametros:
+    unRecurso: Color - color que representa un recurso
+    unaDireccion: Direccion - direccion que representa hacia donde voy a verificar
+    tipo: Booleano
+    */
+
+    return(puedoMover(unaDireccion) && esParcelaConRecurso_Al_(unRecurso,unaDireccion))
+
+}
+
+function esParcelaConRecurso_Al_(unRecurso, unaDireccion) {
+    /*
+    proposito:indicar si en la parcela en direccion "unaDireccion" hay recurso "unRecurso"
+    precondiciones:debe haber al menos una parcela en la direccion "unaDireccion"
+    tipo:Booleano
+    */
+
+    Mover(unaDireccion)
+    return(hayRecurso_Aca(unRecurso))
+}
+
+// 2)
+
+function aumentarEn_RecursoDeMenosRiqueza(unNumero) {
+    /*
+    proposito: aumentar en "unNumero" el recurso de menos riqueza en el mapa
+    precondiciones: debe existir al menos un recrso con menor riqueza en el mapa
+    parametro:
+    unNumero - Numero: numero que representa la cantidad a aumentar
+    obs: es un recorrido de transformacion sobre parcelas de un mapa para incrementar en la cantidad dada el recurso con menos riqueza
+    en todo el mapa
+    */
+
+    IrAPrimeraParcela()
+    while(haySiguienteParcela()) {
+        AumentarEn_AlRecurso_(unNumero, esRecursoDeMenorRiqueza())
+        IrASiguienteParcela()
+    }
+    AumentarEn_AlRecurso_umentarEn_AlRecurso_Aca(unNumero, RecursoDeMenosRiqueza())
+}
+
+
+procedure AumentarEn_AlRecurso_Aca(unNumero, unRecurso) {
+    /*
+    proposito: aumentar en "unNumero" al recurso "unRecurso" en la parcela actual
+    precondiciones:ninguna, proceso total
+    parametros:
+    unNumero - Numero : numero que representa la cantidad a aumentar
+    unRecurso - Color : color que representa el recurso que se aumentara
+    */
+
+    repeat(unNumero) {
+        IncrementarRecurso_Aca(unRecurso)
+    }
+        
+
+    
+}
+
+function recursoDeMenosRiqueza() {
+    /*
+    proposito: describe el recurso de menor riqueza en el mapa
+    precondiciones: debe existir un recurso con menor riquesa que otros
+    tipo: color
+    obs: es un recorrido de minimo sobre recursos para saber cual es el de menor riqueza
+    */
+
+    recursoDeMenosRiquezaHastaAhora := minRecurso()
+    recursoActual := minRecurso()
+    while(recursoActual /= maxRecurso()) {
+        recursoActual := siguienteRecursoA_(recursoActual)
+        recursoDeMenorRiquezaHastaAhora := recursoConMenorRiquezaEntre_Y_(recursoActual, recursoDeMenorRiquezaHastaAhora)
+    }
+    return(recursoDeMenorRiquezaHastaAhora)
+}
+
+function recursoConMenorRiquezaEntre_Y_(primerRecurso,segundoRecurso) {
+    /*
+    proposito: describe el recurso de menor riqueza entre "primerRecurso" y segundoRecurso", si son iguales elige el primero
+    precondiciones: ninguna
+    parametros:
+    primeraDireccion: Direccion: color que representa el primer recurso
+    segundaDireccion: Direccion: color que representa el segundo color
+    tipo: color
+    */
+
+    return(choose primerRecurso when (intensidadDeRecurso:(primerRecurso) < intensidadDeRecurso_(segundoRecurso))
+        segundoRecurso otherwise)
+}
+
+function IntensidadDeRecurso_(unRecurso) {
+    /*
+    proposito:describe la intensidad del recurso "unRecurso" en el mapa
+    precondiciones:ninguna operacion total
+    parametros:
+    unRecurso: Color: color que representa un recurso
+    obs: es un recorrido de acumulacion sobre parcelas de un mapa para tener la intensidad total del recurso dado
+    */
+
+    intensidadHastaAhora := 0
+    IrAPrimeraParcela()
+    while(haySiguienteParcela()) {
+        intensidadHastaAhora := intensidadHastaAhora + intensidadDelRecurso_SiHay(unRecurso)
+        IrASiguienteParcela()
+    }
+    return(intensidadHastaAhora + intensidadDelRecurso_SiHay(unRecurso))
+
+}
+
+
+function intensidadDelRecurso_SiHay(unRecurso) {
+    /*
+    proposito: describe la intensidad del recurso "unRecurso" si hay de lo contrario describe 0
+    precondicion: ninguna operacion total
+    parametros:
+    unRecurso: Color: color que representa un recurso
+    tipo: numero
+    */
+
+    return(choose intensidadDelRecurso_Aca(unRecurso) when (hayRecurso_Aca(unRecurso))
+        0 otherwise)
+}
+
+procedure IrAPrimeraParcela() {
+    /*
+    proposito: ubicar la primera parcela del mapa
+    precondiciones: ninguna, operacion total
+    */
+
+    IrALaPrimeraCeldaDeUnRecorridoAl_Y_(Norte,Este)  // biblitoeca p8
+
+}
+
+function haySiguienteParcela() {
+    /*
+    proposito: indicar si hay siguiente parcela
+    precondiciones: ninguna, funcion total
+    tipo: booleano
+    */
+
+    return(haySiguienteCeldaEnUnRecorridoAl_YAl_(Norte,Este))   // biblioeca p8
+}
+
+procedure IrASiguienteParcela() {
+    /*
+    proposito: ir a la siguiente parcela
+    precondicion: ninguna
+    */
+
+    IrASiguienteParcelaEnUnRecorridoAl_Y_(Norte,Este)  // biblioteca p8
+}
+
+// 3)
+
+
+/*
+A) no, la implementacion no funciona, no se sabe la cantidad a penalizar (-15)
+supera la intensidad del recurso (recurso <15)dando como resultado un numero negativo. 
+ademas no asegura si en la parcela existen todos los recursos
+B) no, la implementacion no es la adecuada por uso innecesario de variables, ademas de los nombres pocos descriptivos.
+Pudiendo utilizar otra estrategia para penalizar a cada recurso asegurando que hay en la parcela, por ejemplo un recorrido sobre recursos
+*/

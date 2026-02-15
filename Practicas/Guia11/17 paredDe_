@@ -1,0 +1,30 @@
+/*
+ 17.Solo los pares
+ Escribir la función paresDe_, que dada una lista de números describe una lista solo con los pares de
+ dicha lista .2
+ Ejemplo: paresDe_([1, 4, 2, 3, 7, 8, 9])describelalista[4, 2, 8].
+*/
+
+function paresDe_(numeros) {
+    /*
+    prop:
+    prec:
+    param:
+    numeros: Lista de Nuevos
+    tipo: lista de numeros
+    observaciones: es un recorrido de
+    */
+
+    listaResultante :=  []
+    numerosRestantes := numeros
+    while(not esVacia(numerosRestantes)) {
+        listaResultante := listaResultante ++ singular_Si_(unElemento, condicion)
+        numerosRestantes := resto(numerosRestantes)
+    }
+    return(listaResultante)
+
+}
+
+
+
+singular_Si_(unElemento, condicion) //describe un numero de una lista si cumple la condicion

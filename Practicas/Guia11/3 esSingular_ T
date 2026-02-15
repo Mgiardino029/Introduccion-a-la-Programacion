@@ -1,0 +1,22 @@
+/*
+ Es singular
+ BIBLIOTECA Escribir la función esSingular_ que dada una lista indica sí la misma es singular, es
+ decir, sí tiene únicamente un elemento. Notar que la función debe ser total.
+ AYUDA: considerar utilizar esVacía en combinación con otras operaciones primitivas para arribar a una
+ solución
+*/
+
+function esSingular_(lista) {
+    /*
+    proposito: indica si la lista "lista" es singular
+    precondicion:
+    parametros:
+    lista: Lista de Elementos
+    tipo: elemento
+    */
+
+    return( not esVacia(lista) && esVacia(resto(lista)) 
+    
+
+
+}

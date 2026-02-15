@@ -1,0 +1,22 @@
+/*
+ Singular
+ Escribir la función singularCon_ que dado un elemento describe la lista que tiene únicamente el
+ elemento dado.
+ */
+
+1
+function singularCon_(elemento) {
+    /*
+    proposito: describe la lista que tiene el elemento "elemento"
+    precondiciones: ninguna
+    parametros: 
+    elemento: Lista de Elementos
+    tipo: Elemento
+    */
+
+    return([elemento])
+
+
+}
+
+
